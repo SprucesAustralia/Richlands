@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>514 Boundary Road, Richlands - Post Construction Cleaning - Office Refurbishment</title>
+  <title>Home - 514 Boundary Road, Richlands - Post Construction Cleaning - Office Refurbishment</title>
   <style>
-    /* Base styles using Spruces branding (see :contentReference[oaicite:1]{index=1} for brand colours and typography) */
     body {
       margin: 0;
       font-family: 'Articulat CF', sans-serif;
@@ -13,7 +12,7 @@
       color: #000;
     }
     header {
-      background-color: #01c6a0; /* Accent from brand palette */
+      background-color: #01c6a0; /* Brand accent colour */
       padding: 20px;
       text-align: center;
       color: #fff;
@@ -23,66 +22,29 @@
       max-width: 1200px;
       margin: auto;
       padding: 20px;
+      text-align: center;
     }
-    /* Navigation buttons centered on home */
     .nav-buttons {
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 10px;
-      margin: 20px 0;
+      margin-top: 20px;
     }
-    .nav-buttons button {
+    .nav-buttons a {
+      display: inline-block;
       background-color: #01c6a0;
       color: #fff;
-      border: none;
+      text-decoration: none;
       padding: 10px 20px;
-      font-size: 1em;
       border-radius: 5px;
-      cursor: pointer;
       width: 80%;
       max-width: 300px;
+      text-align: center;
     }
-    /* Each section (page) – only one is visible at a time */
-    .section {
-      display: none;
-    }
-    .active {
-      display: block;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 20px;
-    }
-    table, th, td {
-      border: 1px solid #ccc;
-    }
-    th, td {
-      padding: 10px;
-      text-align: left;
-      vertical-align: top;
-    }
-    input[type="text"] {
-      width: 100%;
-      box-sizing: border-box;
-    }
-    input[type="file"] {
-      display: block;
-    }
-    .preview {
-      max-width: 100px;
-      max-height: 100px;
-      margin-top: 10px;
-      display: none;
-    }
-    /* Responsive styling for mobile devices */
     @media (max-width: 600px) {
-      .nav-buttons button {
+      .nav-buttons a {
         width: 90%;
-      }
-      table, th, td {
-        font-size: 0.9em;
       }
     }
   </style>
@@ -92,301 +54,12 @@
     514 Boundary Road, Richlands - Post Construction Cleaning - Office Refurbishment
   </header>
   <div class="container">
-    <!-- Home Navigation -->
     <div class="nav-buttons">
-      <button onclick="showSection('scopeOfWork')">Scope of Work</button>
-      <button onclick="showSection('bookingDetails')">Booking Details</button>
-      <button onclick="showSection('siteAccessInfo')">Site Acces Info</button>
-      <button onclick="showSection('finalInspection')">Final Inspection Cleaning Checklist</button>
+      <a href="scope-of-work.html">Scope of Work</a>
+      <a href="booking-details.html">Booking Details</a>
+      <a href="site-access-info.html">Site Acces Info</a>
+      <a href="final-inspection.html">Final Inspection Cleaning Checklist</a>
     </div>
-
-    <!-- Scope of Work Section -->
-    <section id="scopeOfWork" class="section active">
-      <h2>Scope of Work</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Area</th>
-            <th>Task</th>
-            <th>Notes</th>
-            <th>Tools</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Site/General</td>
-            <td>
-              Initial Preparation &amp; Safety Compliance<br>
-              - Conduct a thorough site inspection to identify access restrictions, hazardous areas, or special cleaning requirements.<br>
-              - Confirm all major construction debris and waste have been removed by the builder or contractor.<br>
-              - Coordinate with other trades.
-            </td>
-            <td>
-              - Ensure all cleaning personnel are inducted and equipped with proper PPE.<br>
-              - Verify compliance with relevant Australian Standards, NCC, and local codes.
-            </td>
-            <td>
-              - Inspection checklist<br>
-              - PPE (hard hats, gloves, goggles, etc.)<br>
-              - Communication devices
-            </td>
-          </tr>
-          <tr>
-            <td>Internal Areas</td>
-            <td>
-              General Internal Cleaning<br>
-              - Remove all loose dust, dirt, and construction residue from floors, walls, and ceilings.<br>
-              - Vacuum carpeted areas and dust off tiled, vinyl, and timber floors.<br>
-              - Mop hard floor surfaces; clean doors, door frames, handles, and stops.<br>
-              - Wipe skirting boards, window sills, and horizontal ledges.<br>
-              - Dust internal signages, outlets, switches, fans, and AC vents.<br>
-              - Spot clean walls and vacuum stairwells (including handrails and balustrades).
-            </td>
-            <td>
-              - Pay special attention to areas with heavy construction residue or adhesive marks.<br>
-              - Ensure all surfaces are free of smudges and fingerprints.
-            </td>
-            <td>
-              - Vacuum cleaner<br>
-              - Mops and buckets<br>
-              - Dusters and microfiber cloths<br>
-              - All-purpose cleaning agents
-            </td>
-          </tr>
-          <tr>
-            <td>Windows &amp; Glazing</td>
-            <td>
-              Cleaning of Windows &amp; Glazing<br>
-              - Clean all internal windows including frames, tracks, and sills.<br>
-              - Remove protective tape and any adhesive residue.<br>
-              - Wipe down glazing panels, partitions, and mirrors.
-            </td>
-            <td>
-              - Ensure windows operate smoothly and have a streak-free finish.
-            </td>
-            <td>
-              - Glass cleaner<br>
-              - Microfiber cloths<br>
-              - Squeegee
-            </td>
-          </tr>
-          <tr>
-            <td>Joinery &amp; Fixtures</td>
-            <td>
-              Cleaning Joinery &amp; Fixtures<br>
-              - Dust and wipe down all joinery such as cabinetry, shelves, and cupboard interiors/exteriors.<br>
-              - Clean fixtures including door handles, light switches, and power outlets.<br>
-              - Clean basic kitchen surfaces, benchtops, and sinks.
-            </td>
-            <td>
-              - In-depth appliance cleaning is not part of the standard scope.
-            </td>
-            <td>
-              - Soft cloths<br>
-              - Mild detergent<br>
-              - Dusters
-            </td>
-          </tr>
-          <tr>
-            <td>Sanitary Areas</td>
-            <td>
-              Sanitary Areas Cleaning (Bathrooms, Powder Rooms, Common Amenities)<br>
-              - Clean and disinfect toilets, urinals, sinks, and taps.<br>
-              - Wipe down vanities, mirrors, towel rails, and soap holders.<br>
-              - Clean shower screens and remove any protective stickers.<br>
-              - Mop and sanitize tiled/vinyl floors.
-            </td>
-            <td>
-              - Emphasize hygiene and sanitation, especially on high-touch surfaces.
-            </td>
-            <td>
-              - Disinfectants<br>
-              - Scrub brushes<br>
-              - Mops<br>
-              - Cleaning cloths<br>
-              - Gloves
-            </td>
-          </tr>
-          <tr>
-            <td>External Areas</td>
-            <td>
-              Balconies, Patios &amp; Outdoor Cleaning<br>
-              - Sweep and remove loose dust and debris from balconies and outdoor areas.<br>
-              - Lightly wash flooring to remove dust and residue.<br>
-              - Remove any construction rubbish.
-            </td>
-            <td>
-              - Ensure all outdoor areas are clear of construction waste and ready for use.
-            </td>
-            <td>
-              - Brooms<br>
-              - Outdoor cleaning solutions<br>
-              - Water hose or pressure washer (if required)
-            </td>
-          </tr>
-          <tr>
-            <td>Site Completion</td>
-            <td>
-              Final Checks &amp; Waste Disposal<br>
-              - Place all cleaning-related waste into designated bins.<br>
-              - Ensure the entire site is left tidy and ready for inspection.
-            </td>
-            <td>
-              - No specialized treatments or deep polishing are included at this stage.
-            </td>
-            <td>
-              - Waste bins<br>
-              - Disposal bags<br>
-              - Final inspection checklist
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-
-    <!-- Booking Details Section -->
-    <section id="bookingDetails" class="section">
-      <h2>Booking Details</h2>
-      <table>
-        <tbody>
-          <tr>
-            <th>Field</th>
-            <th>Details</th>
-            <th>Other Details</th>
-            <th>Notes</th>
-            <th>Other Notes</th>
-          </tr>
-          <tr>
-            <td>Site Address</td>
-            <td colspan="4">514 Boundary Road, Richlands, Queensland 4077</td>
-          </tr>
-          <tr>
-            <td>Property Size</td>
-            <td>
-              <strong>Building A</strong><br>
-              Ground Floor = 326.8m<sup>2</sup><br>
-              Level 1 = 296.7m<sup>2</sup>
-            </td>
-            <td>
-              <strong>Building B</strong><br>
-              Ground Floor = 319.3m<sup>2</sup><br>
-              Level 1 = 494.1m<sup>2</sup>
-            </td>
-            <td colspan="2"></td>
-          </tr>
-          <tr>
-            <td>Cleaner Details</td>
-            <td colspan="4"></td>
-          </tr>
-          <tr>
-            <td>Cleaning Instructions</td>
-            <td colspan="4">Post Construction Cleaning</td>
-          </tr>
-          <tr>
-            <td>Cleaning Type</td>
-            <td colspan="4">Post Construction Cleaning</td>
-          </tr>
-          <tr>
-            <td>Cleaning Frequency</td>
-            <td colspan="4">1 Visit</td>
-          </tr>
-          <tr>
-            <td>Cleaning Date 1</td>
-            <td colspan="4">13/03/25 - 17/03/2025</td>
-          </tr>
-          <tr>
-            <td>Cleaning Date 2</td>
-            <td colspan="4"></td>
-          </tr>
-          <tr>
-            <td>Time</td>
-            <td colspan="4"></td>
-          </tr>
-          <tr>
-            <td>Number of Cleaners</td>
-            <td colspan="4"></td>
-          </tr>
-          <tr>
-            <td>Duration (Hours:Minutes)</td>
-            <td colspan="4">Fix</td>
-          </tr>
-          <tr>
-            <td>Pay to Cleaner</td>
-            <td colspan="4"></td>
-          </tr>
-          <tr>
-            <td>Specific Areas</td>
-            <td colspan="4">
-              – Initial Preparation &amp; Safety Compliance (Site/General)<br>
-              – General Internal Areas<br>
-              – Windows &amp; Glazing<br>
-              – Joinery &amp; Fixtures<br>
-              – Sanitary Areas<br>
-              – Balconies, Patios &amp; External Areas<br>
-              – Final Checks &amp; Waste Disposal
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-
-    <!-- Site Acces Info Section -->
-    <section id="siteAccessInfo" class="section">
-      <h2>Site Acces Info</h2>
-      <!-- Replace the src with your actual image file -->
-      <img src="site-access-info.jpg" alt="Site Access Info Image" style="width:100%; max-width:600px;">
-      <p>(Replace "site-access-info.jpg" with your actual image file.)</p>
-    </section>
-
-    <!-- Final Inspection Cleaning Checklist Section -->
-    <section id="finalInspection" class="section">
-      <h2>Final Inspection Cleaning Checklist</h2>
-      <form id="inspectionForm">
-        <!-- Section 1: General Internal Areas -->
-        <h3>1. General Internal Areas</h3>
-        <table>
-          <thead>
-            <tr>
-              <th>Item</th>
-              <th>OK</th>
-              <th>Needs Attention</th>
-              <th>Comments</th>
-              <th>Upload Photo</th>
-              <th>Preview</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Floors (all debris/dust removed, no stains or footprints)</td>
-              <td><input type="checkbox" name="floors_ok"></td>
-              <td><input type="checkbox" name="floors_attention"></td>
-              <td><input type="text" name="floors_comments"></td>
-              <td><input type="file" accept="image/*" onchange="previewImage(event, 'floors_preview')"></td>
-              <td><img id="floors_preview" class="preview" src="#" alt="Image Preview"></td>
-            </tr>
-            <tr>
-              <td>Carpets (vacuumed, spot‐cleaned)</td>
-              <td><input type="checkbox" name="carpets_ok"></td>
-              <td><input type="checkbox" name="carpets_attention"></td>
-              <td><input type="text" name="carpets_comments"></td>
-              <td><input type="file" accept="image/*" onchange="previewImage(event, 'carpets_preview')"></td>
-              <td><img id="carpets_preview" class="preview" src="#" alt="Image Preview"></td>
-            </tr>
-            <tr>
-              <td>Walls and Ceilings (no dust, smudges, or marks)</td>
-              <td><input type="checkbox" name="walls_ok"></td>
-              <td><input type="checkbox" name="walls_attention"></td>
-              <td><input type="text" name="walls_comments"></td>
-              <td><input type="file" accept="image/*" onchange="previewImage(event, 'walls_preview')"></td>
-              <td><img id="walls_preview" class="preview" src="#" alt="Image Preview"></td>
-            </tr>
-            <tr>
-              <td>Doors, Door Frames, Handles (clean, stickers removed)</td>
-              <td><input type="checkbox" name="doors_ok"></td>
-              <td><input type="checkbox" name="doors_attention"></td>
-              <td><input type="text" name="doors_comments"></td>
-              <td><input type="file" accept="image/*" onchange="previewImage(event, 'doors_preview')"></td>
-              <td><img id="doors_preview" class="preview" src="#" alt="Image Preview"></td>
-            </tr>
-            <tr>
-              <td>Skirting Boards, Window Sills, Ledges (dust
+  </div>
+</body>
+</html>
