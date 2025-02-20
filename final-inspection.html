@@ -30,10 +30,13 @@
       color: #01c6a0;
       font-weight: bold;
     }
+    h2, h3 {
+      margin-top: 30px;
+    }
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-bottom: 20px;
+      margin-bottom: 30px;
     }
     table, th, td {
       border: 1px solid #ccc;
@@ -41,25 +44,35 @@
     th, td {
       padding: 10px;
       text-align: left;
-      vertical-align: top;
+      vertical-align: middle;
     }
     input[type="text"] {
       width: 100%;
       box-sizing: border-box;
     }
+    /* Hide native file input */
     input[type="file"] {
-      display: block;
-    }
-    .preview {
-      max-width: 100px;
-      max-height: 100px;
-      margin-top: 10px;
       display: none;
     }
-    @media (max-width: 600px) {
-      table, th, td {
-        font-size: 0.9em;
-      }
+    /* Styled file upload button */
+    .custom-file-upload {
+      display: inline-block;
+      padding: 10px 20px;
+      cursor: pointer;
+      background-color: #28a745;
+      color: #fff;
+      border-radius: 5px;
+      font-size: 1em;
+      margin-bottom: 5px;
+    }
+    .custom-file-upload:hover {
+      background-color: #218838;
+    }
+    .preview {
+      display: block;
+      margin-top: 10px;
+      max-width: 100px;
+      max-height: 100px;
     }
     button.submit-btn {
       background-color: #01c6a0;
@@ -68,6 +81,20 @@
       border: none;
       border-radius: 5px;
       cursor: pointer;
+      font-size: 1em;
+    }
+    @media (max-width: 600px) {
+      table, th, td {
+        font-size: 0.9em;
+      }
+      .custom-file-upload {
+        padding: 8px 16px;
+        font-size: 0.9em;
+      }
+      button.submit-btn {
+        padding: 8px 16px;
+        font-size: 0.9em;
+      }
     }
   </style>
 </head>
@@ -85,291 +112,304 @@
         <thead>
           <tr>
             <th>Item</th>
-            <th>OK</th>
-            <th>Needs Attention</th>
             <th>Comments</th>
             <th>Upload Photo</th>
-            <th>Preview</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>Floors (all debris/dust removed, no stains or footprints)</td>
-            <td><input type="checkbox" name="floors_ok"></td>
-            <td><input type="checkbox" name="floors_attention"></td>
             <td><input type="text" name="floors_comments"></td>
-            <td><input type="file" accept="image/*" onchange="previewImage(event, 'floors_preview')"></td>
-            <td><img id="floors_preview" class="preview" src="#" alt="Image Preview"></td>
+            <td>
+              <label class="custom-file-upload" for="floors_file">Upload Photo</label>
+              <input type="file" id="floors_file" accept="image/*" onchange="previewImage(event, 'floors_preview')">
+              <img id="floors_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
+            </td>
           </tr>
           <tr>
             <td>Carpets (vacuumed, spot‐cleaned)</td>
-            <td><input type="checkbox" name="carpets_ok"></td>
-            <td><input type="checkbox" name="carpets_attention"></td>
             <td><input type="text" name="carpets_comments"></td>
-            <td><input type="file" accept="image/*" onchange="previewImage(event, 'carpets_preview')"></td>
-            <td><img id="carpets_preview" class="preview" src="#" alt="Image Preview"></td>
+            <td>
+              <label class="custom-file-upload" for="carpets_file">Upload Photo</label>
+              <input type="file" id="carpets_file" accept="image/*" onchange="previewImage(event, 'carpets_preview')">
+              <img id="carpets_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
+            </td>
           </tr>
           <tr>
             <td>Walls and Ceilings (no dust, smudges, or marks)</td>
-            <td><input type="checkbox" name="walls_ok"></td>
-            <td><input type="checkbox" name="walls_attention"></td>
             <td><input type="text" name="walls_comments"></td>
-            <td><input type="file" accept="image/*" onchange="previewImage(event, 'walls_preview')"></td>
-            <td><img id="walls_preview" class="preview" src="#" alt="Image Preview"></td>
+            <td>
+              <label class="custom-file-upload" for="walls_file">Upload Photo</label>
+              <input type="file" id="walls_file" accept="image/*" onchange="previewImage(event, 'walls_preview')">
+              <img id="walls_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
+            </td>
           </tr>
           <tr>
             <td>Doors, Door Frames, Handles (clean, stickers removed)</td>
-            <td><input type="checkbox" name="doors_ok"></td>
-            <td><input type="checkbox" name="doors_attention"></td>
             <td><input type="text" name="doors_comments"></td>
-            <td><input type="file" accept="image/*" onchange="previewImage(event, 'doors_preview')"></td>
-            <td><img id="doors_preview" class="preview" src="#" alt="Image Preview"></td>
+            <td>
+              <label class="custom-file-upload" for="doors_file">Upload Photo</label>
+              <input type="file" id="doors_file" accept="image/*" onchange="previewImage(event, 'doors_preview')">
+              <img id="doors_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
+            </td>
           </tr>
           <tr>
             <td>Skirting Boards, Window Sills, Ledges (dust‐free)</td>
-            <td><input type="checkbox" name="skirting_ok"></td>
-            <td><input type="checkbox" name="skirting_attention"></td>
             <td><input type="text" name="skirting_comments"></td>
-            <td><input type="file" accept="image/*" onchange="previewImage(event, 'skirting_preview')"></td>
-            <td><img id="skirting_preview" class="preview" src="#" alt="Image Preview"></td>
+            <td>
+              <label class="custom-file-upload" for="skirting_file">Upload Photo</label>
+              <input type="file" id="skirting_file" accept="image/*" onchange="previewImage(event, 'skirting_preview')">
+              <img id="skirting_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
+            </td>
           </tr>
           <tr>
             <td>Air Vents, Fans, Light Fittings (dust‐free)</td>
-            <td><input type="checkbox" name="air_ok"></td>
-            <td><input type="checkbox" name="air_attention"></td>
             <td><input type="text" name="air_comments"></td>
-            <td><input type="file" accept="image/*" onchange="previewImage(event, 'air_preview')"></td>
-            <td><img id="air_preview" class="preview" src="#" alt="Image Preview"></td>
+            <td>
+              <label class="custom-file-upload" for="air_file">Upload Photo</label>
+              <input type="file" id="air_file" accept="image/*" onchange="previewImage(event, 'air_preview')">
+              <img id="air_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
+            </td>
           </tr>
           <tr>
             <td>Outlets and Switches (dust‐free, no residue)</td>
-            <td><input type="checkbox" name="outlets_ok"></td>
-            <td><input type="checkbox" name="outlets_attention"></td>
             <td><input type="text" name="outlets_comments"></td>
-            <td><input type="file" accept="image/*" onchange="previewImage(event, 'outlets_preview')"></td>
-            <td><img id="outlets_preview" class="preview" src="#" alt="Image Preview"></td>
+            <td>
+              <label class="custom-file-upload" for="outlets_file">Upload Photo</label>
+              <input type="file" id="outlets_file" accept="image/*" onchange="previewImage(event, 'outlets_preview')">
+              <img id="outlets_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
+            </td>
           </tr>
         </tbody>
       </table>
+      
       <!-- Section 2: Windows & Glazing -->
       <h3>2. Windows &amp; Glazing</h3>
       <table>
         <thead>
           <tr>
             <th>Item</th>
-            <th>OK</th>
-            <th>Needs Attention</th>
             <th>Comments</th>
             <th>Upload Photo</th>
-            <th>Preview</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>Window Glass (streak‐free, no adhesive residue)</td>
-            <td><input type="checkbox" name="windowGlass_ok"></td>
-            <td><input type="checkbox" name="windowGlass_attention"></td>
             <td><input type="text" name="windowGlass_comments"></td>
-            <td><input type="file" accept="image/*" onchange="previewImage(event, 'windowGlass_preview')"></td>
-            <td><img id="windowGlass_preview" class="preview" src="#" alt="Image Preview"></td>
+            <td>
+              <label class="custom-file-upload" for="windowGlass_file">Upload Photo</label>
+              <input type="file" id="windowGlass_file" accept="image/*" onchange="previewImage(event, 'windowGlass_preview')">
+              <img id="windowGlass_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
+            </td>
           </tr>
           <tr>
             <td>Window Frames, Tracks, Sills (clean, debris removed)</td>
-            <td><input type="checkbox" name="windowFrames_ok"></td>
-            <td><input type="checkbox" name="windowFrames_attention"></td>
             <td><input type="text" name="windowFrames_comments"></td>
-            <td><input type="file" accept="image/*" onchange="previewImage(event, 'windowFrames_preview')"></td>
-            <td><img id="windowFrames_preview" class="preview" src="#" alt="Image Preview"></td>
+            <td>
+              <label class="custom-file-upload" for="windowFrames_file">Upload Photo</label>
+              <input type="file" id="windowFrames_file" accept="image/*" onchange="previewImage(event, 'windowFrames_preview')">
+              <img id="windowFrames_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
+            </td>
           </tr>
           <tr>
             <td>Internal Glazing Panels, Partitions, Mirrors (streak‐free)</td>
-            <td><input type="checkbox" name="internalGlazing_ok"></td>
-            <td><input type="checkbox" name="internalGlazing_attention"></td>
             <td><input type="text" name="internalGlazing_comments"></td>
-            <td><input type="file" accept="image/*" onchange="previewImage(event, 'internalGlazing_preview')"></td>
-            <td><img id="internalGlazing_preview" class="preview" src="#" alt="Image Preview"></td>
+            <td>
+              <label class="custom-file-upload" for="internalGlazing_file">Upload Photo</label>
+              <input type="file" id="internalGlazing_file" accept="image/*" onchange="previewImage(event, 'internalGlazing_preview')">
+              <img id="internalGlazing_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
+            </td>
           </tr>
         </tbody>
       </table>
+      
       <!-- Section 3: Joinery & Fixtures -->
       <h3>3. Joinery &amp; Fixtures</h3>
       <table>
         <thead>
           <tr>
             <th>Item</th>
-            <th>OK</th>
-            <th>Needs Attention</th>
             <th>Comments</th>
             <th>Upload Photo</th>
-            <th>Preview</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>Cabinetry, Shelves, Cupboards (interior/exterior dust‐free)</td>
-            <td><input type="checkbox" name="cabinetry_ok"></td>
-            <td><input type="checkbox" name="cabinetry_attention"></td>
             <td><input type="text" name="cabinetry_comments"></td>
-            <td><input type="file" accept="image/*" onchange="previewImage(event, 'cabinetry_preview')"></td>
-            <td><img id="cabinetry_preview" class="preview" src="#" alt="Image Preview"></td>
+            <td>
+              <label class="custom-file-upload" for="cabinetry_file">Upload Photo</label>
+              <input type="file" id="cabinetry_file" accept="image/*" onchange="previewImage(event, 'cabinetry_preview')">
+              <img id="cabinetry_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
+            </td>
           </tr>
           <tr>
             <td>Door Handles, Light Switches, Power Outlets (wiped clean)</td>
-            <td><input type="checkbox" name="doorHandles_ok"></td>
-            <td><input type="checkbox" name="doorHandles_attention"></td>
             <td><input type="text" name="doorHandles_comments"></td>
-            <td><input type="file" accept="image/*" onchange="previewImage(event, 'doorHandles_preview')"></td>
-            <td><img id="doorHandles_preview" class="preview" src="#" alt="Image Preview"></td>
+            <td>
+              <label class="custom-file-upload" for="doorHandles_file">Upload Photo</label>
+              <input type="file" id="doorHandles_file" accept="image/*" onchange="previewImage(event, 'doorHandles_preview')">
+              <img id="doorHandles_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
+            </td>
           </tr>
           <tr>
             <td>Kitchen Surfaces, Benchtops, Sinks (clean, no stains/residue)</td>
-            <td><input type="checkbox" name="kitchenSurfaces_ok"></td>
-            <td><input type="checkbox" name="kitchenSurfaces_attention"></td>
             <td><input type="text" name="kitchenSurfaces_comments"></td>
-            <td><input type="file" accept="image/*" onchange="previewImage(event, 'kitchenSurfaces_preview')"></td>
-            <td><img id="kitchenSurfaces_preview" class="preview" src="#" alt="Image Preview"></td>
+            <td>
+              <label class="custom-file-upload" for="kitchenSurfaces_file">Upload Photo</label>
+              <input type="file" id="kitchenSurfaces_file" accept="image/*" onchange="previewImage(event, 'kitchenSurfaces_preview')">
+              <img id="kitchenSurfaces_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
+            </td>
           </tr>
         </tbody>
       </table>
+      
       <!-- Section 4: Sanitary Areas -->
       <h3>4. Sanitary Areas (Bathrooms, Powder Rooms, Amenities)</h3>
       <table>
         <thead>
           <tr>
             <th>Item</th>
-            <th>OK</th>
-            <th>Needs Attention</th>
             <th>Comments</th>
             <th>Upload Photo</th>
-            <th>Preview</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>Toilets, Urinals (disinfected, free of stains/odors)</td>
-            <td><input type="checkbox" name="toilets_ok"></td>
-            <td><input type="checkbox" name="toilets_attention"></td>
             <td><input type="text" name="toilets_comments"></td>
-            <td><input type="file" accept="image/*" onchange="previewImage(event, 'toilets_preview')"></td>
-            <td><img id="toilets_preview" class="preview" src="#" alt="Image Preview"></td>
+            <td>
+              <label class="custom-file-upload" for="toilets_file">Upload Photo</label>
+              <input type="file" id="toilets_file" accept="image/*" onchange="previewImage(event, 'toilets_preview')">
+              <img id="toilets_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
+            </td>
           </tr>
           <tr>
             <td>Sinks, Taps (clean, disinfected)</td>
-            <td><input type="checkbox" name="sinks_ok"></td>
-            <td><input type="checkbox" name="sinks_attention"></td>
             <td><input type="text" name="sinks_comments"></td>
-            <td><input type="file" accept="image/*" onchange="previewImage(event, 'sinks_preview')"></td>
-            <td><img id="sinks_preview" class="preview" src="#" alt="Image Preview"></td>
+            <td>
+              <label class="custom-file-upload" for="sinks_file">Upload Photo</label>
+              <input type="file" id="sinks_file" accept="image/*" onchange="previewImage(event, 'sinks_preview')">
+              <img id="sinks_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
+            </td>
           </tr>
           <tr>
             <td>Vanities, Mirrors, Towel Rails, Soap Holders (clean, streak‐free)</td>
-            <td><input type="checkbox" name="vanities_ok"></td>
-            <td><input type="checkbox" name="vanities_attention"></td>
             <td><input type="text" name="vanities_comments"></td>
-            <td><input type="file" accept="image/*" onchange="previewImage(event, 'vanities_preview')"></td>
-            <td><img id="vanities_preview" class="preview" src="#" alt="Image Preview"></td>
+            <td>
+              <label class="custom-file-upload" for="vanities_file">Upload Photo</label>
+              <input type="file" id="vanities_file" accept="image/*" onchange="previewImage(event, 'vanities_preview')">
+              <img id="vanities_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
+            </td>
           </tr>
           <tr>
             <td>Shower Screens (clean, stickers removed)</td>
-            <td><input type="checkbox" name="showerScreens_ok"></td>
-            <td><input type="checkbox" name="showerScreens_attention"></td>
             <td><input type="text" name="showerScreens_comments"></td>
-            <td><input type="file" accept="image/*" onchange="previewImage(event, 'showerScreens_preview')"></td>
-            <td><img id="showerScreens_preview" class="preview" src="#" alt="Image Preview"></td>
+            <td>
+              <label class="custom-file-upload" for="showerScreens_file">Upload Photo</label>
+              <input type="file" id="showerScreens_file" accept="image/*" onchange="previewImage(event, 'showerScreens_preview')">
+              <img id="showerScreens_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
+            </td>
           </tr>
           <tr>
             <td>Floors (mopped, disinfected, no residue)</td>
-            <td><input type="checkbox" name="floorsDisinfected_ok"></td>
-            <td><input type="checkbox" name="floorsDisinfected_attention"></td>
             <td><input type="text" name="floorsDisinfected_comments"></td>
-            <td><input type="file" accept="image/*" onchange="previewImage(event, 'floorsDisinfected_preview')"></td>
-            <td><img id="floorsDisinfected_preview" class="preview" src="#" alt="Image Preview"></td>
+            <td>
+              <label class="custom-file-upload" for="floorsDisinfected_file">Upload Photo</label>
+              <input type="file" id="floorsDisinfected_file" accept="image/*" onchange="previewImage(event, 'floorsDisinfected_preview')">
+              <img id="floorsDisinfected_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
+            </td>
           </tr>
         </tbody>
       </table>
+      
       <!-- Section 5: Balconies, Patios & External Areas -->
       <h3>5. Balconies, Patios &amp; External Areas</h3>
       <table>
         <thead>
           <tr>
             <th>Item</th>
-            <th>OK</th>
-            <th>Needs Attention</th>
             <th>Comments</th>
             <th>Upload Photo</th>
-            <th>Preview</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>Floors (swept, washed, free of construction debris)</td>
-            <td><input type="checkbox" name="balconyFloors_ok"></td>
-            <td><input type="checkbox" name="balconyFloors_attention"></td>
             <td><input type="text" name="balconyFloors_comments"></td>
-            <td><input type="file" accept="image/*" onchange="previewImage(event, 'balconyFloors_preview')"></td>
-            <td><img id="balconyFloors_preview" class="preview" src="#" alt="Image Preview"></td>
+            <td>
+              <label class="custom-file-upload" for="balconyFloors_file">Upload Photo</label>
+              <input type="file" id="balconyFloors_file" accept="image/*" onchange="previewImage(event, 'balconyFloors_preview')">
+              <img id="balconyFloors_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
+            </td>
           </tr>
           <tr>
             <td>Rubbish Removal (all construction trash cleared)</td>
-            <td><input type="checkbox" name="rubbishRemoval_ok"></td>
-            <td><input type="checkbox" name="rubbishRemoval_attention"></td>
             <td><input type="text" name="rubbishRemoval_comments"></td>
-            <td><input type="file" accept="image/*" onchange="previewImage(event, 'rubbishRemoval_preview')"></td>
-            <td><img id="rubbishRemoval_preview" class="preview" src="#" alt="Image Preview"></td>
+            <td>
+              <label class="custom-file-upload" for="rubbishRemoval_file">Upload Photo</label>
+              <input type="file" id="rubbishRemoval_file" accept="image/*" onchange="previewImage(event, 'rubbishRemoval_preview')">
+              <img id="rubbishRemoval_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
+            </td>
           </tr>
           <tr>
             <td>Overall Appearance (tidy, ready for inspection)</td>
-            <td><input type="checkbox" name="overallAppearance_ok"></td>
-            <td><input type="checkbox" name="overallAppearance_attention"></td>
             <td><input type="text" name="overallAppearance_comments"></td>
-            <td><input type="file" accept="image/*" onchange="previewImage(event, 'overallAppearance_preview')"></td>
-            <td><img id="overallAppearance_preview" class="preview" src="#" alt="Image Preview"></td>
+            <td>
+              <label class="custom-file-upload" for="overallAppearance_file">Upload Photo</label>
+              <input type="file" id="overallAppearance_file" accept="image/*" onchange="previewImage(event, 'overallAppearance_preview')">
+              <img id="overallAppearance_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
+            </td>
           </tr>
         </tbody>
       </table>
+      
       <!-- Section 6: Final Checks & Waste Disposal -->
       <h3>6. Final Checks &amp; Waste Disposal</h3>
       <table>
         <thead>
           <tr>
             <th>Item</th>
-            <th>OK</th>
-            <th>Needs Attention</th>
             <th>Comments</th>
             <th>Upload Photo</th>
-            <th>Preview</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>All Cleaning‐Related Waste in Designated Bins</td>
-            <td><input type="checkbox" name="wasteBins_ok"></td>
-            <td><input type="checkbox" name="wasteBins_attention"></td>
             <td><input type="text" name="wasteBins_comments"></td>
-            <td><input type="file" accept="image/*" onchange="previewImage(event, 'wasteBins_preview')"></td>
-            <td><img id="wasteBins_preview" class="preview" src="#" alt="Image Preview"></td>
+            <td>
+              <label class="custom-file-upload" for="wasteBins_file">Upload Photo</label>
+              <input type="file" id="wasteBins_file" accept="image/*" onchange="previewImage(event, 'wasteBins_preview')">
+              <img id="wasteBins_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
+            </td>
           </tr>
           <tr>
             <td>No Specialized Treatments/Deep Polishing (excluded unless specified)</td>
-            <td><input type="checkbox" name="noSpecialized_ok"></td>
-            <td><input type="checkbox" name="noSpecialized_attention"></td>
             <td><input type="text" name="noSpecialized_comments"></td>
-            <td><input type="file" accept="image/*" onchange="previewImage(event, 'noSpecialized_preview')"></td>
-            <td><img id="noSpecialized_preview" class="preview" src="#" alt="Image Preview"></td>
+            <td>
+              <label class="custom-file-upload" for="noSpecialized_file">Upload Photo</label>
+              <input type="file" id="noSpecialized_file" accept="image/*" onchange="previewImage(event, 'noSpecialized_preview')">
+              <img id="noSpecialized_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
+            </td>
           </tr>
           <tr>
             <td>Overall Site Condition (ready for handover/inspection)</td>
-            <td><input type="checkbox" name="overallSiteCondition_ok"></td>
-            <td><input type="checkbox" name="overallSiteCondition_attention"></td>
             <td><input type="text" name="overallSiteCondition_comments"></td>
-            <td><input type="file" accept="image/*" onchange="previewImage(event, 'overallSiteCondition_preview')"></td>
-            <td><img id="overallSiteCondition_preview" class="preview" src="#" alt="Image Preview"></td>
+            <td>
+              <label class="custom-file-upload" for="overallSiteCondition_file">Upload Photo</label>
+              <input type="file" id="overallSiteCondition_file" accept="image/*" onchange="previewImage(event, 'overallSiteCondition_preview')">
+              <img id="overallSiteCondition_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
+            </td>
           </tr>
         </tbody>
       </table>
+      
       <button type="submit" class="submit-btn">Submit</button>
     </form>
   </div>
+  
   <script>
     function previewImage(event, previewId) {
       const input = event.target;
@@ -383,6 +423,7 @@
         reader.readAsDataURL(input.files[0]);
       }
     }
+    
     document.getElementById('inspectionForm').addEventListener('submit', function(e) {
       e.preventDefault();
       alert('Inspection form submitted!');
