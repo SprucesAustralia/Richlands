@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Scope of Work - 514 Boundary Road, Richlands</title>
   <style>
     body {
@@ -10,42 +10,102 @@
       font-family: 'Articulat CF', sans-serif;
       background-color: #ffffff;
       color: #000;
+      line-height: 1.6;
     }
     header {
       background-color: #01c6a0;
-      padding: 20px;
+      padding: 1rem;
       text-align: center;
       color: #fff;
-      font-size: 1.5em;
+      font-size: clamp(1.2rem, 4vw, 1.5rem);
     }
     .container {
       max-width: 1200px;
-      margin: auto;
-      padding: 20px;
+      margin: 0 auto;
+      padding: 1rem;
     }
     a.back {
       display: inline-block;
-      margin-bottom: 20px;
+      margin-bottom: 1.5rem;
       text-decoration: none;
       color: #01c6a0;
       font-weight: bold;
+      transition: color 0.3s ease;
+    }
+    a.back:hover {
+      color: #019f82;
+    }
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: #333;
     }
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-bottom: 20px;
+      margin-bottom: 1.5rem;
     }
     table, th, td {
       border: 1px solid #ccc;
     }
     th, td {
-      padding: 10px;
+      padding: 0.75rem;
       text-align: left;
       vertical-align: top;
     }
+    th {
+      background-color: #f5f5f5;
+      font-weight: bold;
+    }
+
+    /* Mobile-friendly table */
+    @media (max-width: 768px) {
+      table {
+        display: block;
+        overflow-x: auto; /* Horizontal scroll for wide tables */
+      }
+      th, td {
+        font-size: 0.9rem;
+        padding: 0.5rem;
+      }
+    }
+
     @media (max-width: 600px) {
-      table, th, td {
-        font-size: 0.9em;
+      /* Stack table rows as blocks on very small screens */
+      thead {
+        display: none; /* Hide headers on small screens */
+      }
+      tr {
+        display: block;
+        margin-bottom: 1rem;
+        border: 1px solid #ccc;
+      }
+      td {
+        display: block;
+        font-size: 0.9rem;
+        padding: 0.5rem;
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+      }
+      td::before {
+        content: attr(data-label); /* Use data-label for mobile pseudo-headers */
+        font-weight: bold;
+        display: block;
+        margin-bottom: 0.25rem;
+        color: #01c6a0;
+      }
+      td:last-child {
+        border-bottom: none;
+      }
+    }
+
+    @media (max-width: 400px) {
+      header {
+        padding: 0.75rem;
+      }
+      .container {
+        padding: 0.5rem;
       }
     }
   </style>
@@ -55,7 +115,7 @@
     514 Boundary Road, Richlands - Post Construction Cleaning - Office Refurbishment
   </header>
   <div class="container">
-    <a href="index.html" class="back">&larr; Home</a>
+    <a href="index.html" class="back">← Home</a>
     <h2>Scope of Work</h2>
     <table>
       <thead>
@@ -68,26 +128,26 @@
       </thead>
       <tbody>
         <tr>
-          <td>Site/General</td>
-          <td>
-            Initial Preparation &amp; Safety Compliance<br>
+          <td data-label="Area">Site/General</td>
+          <td data-label="Task">
+            Initial Preparation & Safety Compliance<br>
             - Conduct a thorough site inspection to identify access restrictions, hazardous areas, or special cleaning requirements.<br>
             - Confirm all major construction debris and waste have been removed by the builder or contractor.<br>
             - Coordinate with other trades.
           </td>
-          <td>
+          <td data-label="Notes">
             - Ensure all cleaning personnel are inducted and equipped with proper PPE.<br>
             - Verify compliance with relevant Australian Standards, NCC, and local codes.
           </td>
-          <td>
+          <td data-label="Tools">
             - Inspection checklist<br>
             - PPE (hard hats, gloves, goggles, etc.)<br>
             - Communication devices
           </td>
         </tr>
         <tr>
-          <td>Internal Areas</td>
-          <td>
+          <td data-label="Area">Internal Areas</td>
+          <td data-label="Task">
             General Internal Cleaning<br>
             - Remove all loose dust, dirt, and construction residue from floors, walls, and ceilings.<br>
             - Vacuum carpeted areas and dust off tiled, vinyl, and timber floors.<br>
@@ -96,11 +156,11 @@
             - Dust internal signages, outlets, switches, fans, and AC vents.<br>
             - Spot clean walls and vacuum stairwells (including handrails and balustrades).
           </td>
-          <td>
+          <td data-label="Notes">
             - Pay special attention to areas with heavy construction residue or adhesive marks.<br>
             - Ensure all surfaces are free of smudges and fingerprints.
           </td>
-          <td>
+          <td data-label="Tools">
             - Vacuum cleaner<br>
             - Mops and buckets<br>
             - Dusters and microfiber cloths<br>
@@ -108,52 +168,52 @@
           </td>
         </tr>
         <tr>
-          <td>Windows &amp; Glazing</td>
-          <td>
-            Cleaning of Windows &amp; Glazing<br>
+          <td data-label="Area">Windows & Glazing</td>
+          <td data-label="Task">
+            Cleaning of Windows & Glazing<br>
             - Clean all internal windows including frames, tracks, and sills.<br>
             - Remove protective tape and any adhesive residue.<br>
             - Wipe down glazing panels, partitions, and mirrors.
           </td>
-          <td>
+          <td data-label="Notes">
             - Ensure windows operate smoothly and have a streak-free finish.
           </td>
-          <td>
+          <td data-label="Tools">
             - Glass cleaner<br>
             - Microfiber cloths<br>
             - Squeegee
           </td>
         </tr>
         <tr>
-          <td>Joinery &amp; Fixtures</td>
-          <td>
-            Cleaning Joinery &amp; Fixtures<br>
+          <td data-label="Area">Joinery & Fixtures</td>
+          <td data-label="Task">
+            Cleaning Joinery & Fixtures<br>
             - Dust and wipe down all joinery such as cabinetry, shelves, and cupboard interiors/exteriors.<br>
             - Clean fixtures including door handles, light switches, and power outlets.<br>
             - Clean basic kitchen surfaces, benchtops, and sinks.
           </td>
-          <td>
+          <td data-label="Notes">
             - In-depth appliance cleaning is not part of the standard scope.
           </td>
-          <td>
+          <td data-label="Tools">
             - Soft cloths<br>
             - Mild detergent<br>
             - Dusters
           </td>
         </tr>
         <tr>
-          <td>Sanitary Areas</td>
-          <td>
+          <td data-label="Area">Sanitary Areas</td>
+          <td data-label="Task">
             Sanitary Areas Cleaning (Bathrooms, Powder Rooms, Common Amenities)<br>
             - Clean and disinfect toilets, urinals, sinks, and taps.<br>
             - Wipe down vanities, mirrors, towel rails, and soap holders.<br>
             - Clean shower screens and remove any protective stickers.<br>
             - Mop and sanitize tiled/vinyl floors.
           </td>
-          <td>
+          <td data-label="Notes">
             - Emphasize hygiene and sanitation, especially on high-touch surfaces.
           </td>
-          <td>
+          <td data-label="Tools">
             - Disinfectants<br>
             - Scrub brushes<br>
             - Mops<br>
@@ -162,40 +222,25 @@
           </td>
         </tr>
         <tr>
-          <td>External Areas</td>
-          <td>
-            Balconies, Patios &amp; Outdoor Cleaning<br>
+          <td data-label="Area">External Areas</td>
+          <td data-label="Task">
+            Balconies, Patios & Outdoor Cleaning<br>
             - Sweep and remove loose dust and debris from balconies and outdoor areas.<br>
             - Lightly wash flooring to remove dust and residue.<br>
             - Remove any construction rubbish.
           </td>
-          <td>
+          <td data-label="Notes">
             - Ensure all outdoor areas are clear of construction waste and ready for use.
           </td>
-          <td>
+          <td data-label="Tools">
             - Brooms<br>
             - Outdoor cleaning solutions<br>
             - Water hose or pressure washer (if required)
           </td>
         </tr>
         <tr>
-          <td>Site Completion</td>
-          <td>
-            Final Checks &amp; Waste Disposal<br>
+          <td data-label="Area">Site Completion</td>
+          <td data-label="Task">
+            Final Checks & Waste Disposal<br>
             - Place all cleaning-related waste into designated bins.<br>
-            - Ensure the entire site is left tidy and ready for inspection.
-          </td>
-          <td>
-            - No specialized treatments or deep polishing are included at this stage.
-          </td>
-          <td>
-            - Waste bins<br>
-            - Disposal bags<br>
-            - Final inspection checklist
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</body>
-</html>
+            - Ensure the entire site is left tidy and ready
