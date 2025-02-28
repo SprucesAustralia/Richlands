@@ -5,107 +5,152 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Scope of Work - 514 Boundary Road, Richlands</title>
   <style>
-    body {
+    * {
       margin: 0;
-      font-family: 'Articulat CF', sans-serif;
-      background-color: #ffffff;
-      color: #000;
-      line-height: 1.6;
-    }
-    header {
-      background-color: #01c6a0;
-      padding: 1rem;
-      text-align: center;
-      color: #fff;
-      font-size: clamp(1.2rem, 4vw, 1.5rem);
-    }
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 1rem;
-    }
-    a.back {
-      display: inline-block;
-      margin-bottom: 1.5rem;
-      text-decoration: none;
-      color: #01c6a0;
-      font-weight: bold;
-      transition: color 0.3s ease;
-    }
-    a.back:hover {
-      color: #019f82;
-    }
-    h2 {
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-      color: #333;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 1.5rem;
-    }
-    table, th, td {
-      border: 1px solid #ccc;
-    }
-    th, td {
-      padding: 0.75rem;
-      text-align: left;
-      vertical-align: top;
-    }
-    th {
-      background-color: #f5f5f5;
-      font-weight: bold;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    /* Mobile-friendly table */
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      color: #333;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    header {
+      background: #01c6a0;
+      padding: 1.5rem;
+      text-align: center;
+      color: white;
+      font-size: clamp(1.2rem, 4vw, 2rem);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      margin-bottom: 2rem;
+      text-decoration: none;
+      color: #01c6a0;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .back-btn:hover {
+      color: #019f82;
+      transform: translateX(-5px);
+    }
+
+    .back-btn::before {
+      content: '←';
+      margin-right: 0.5rem;
+    }
+
+    h2 {
+      font-size: 2rem;
+      color: #01c6a0;
+      text-align: center;
+      margin-bottom: 2rem;
+      animation: fadeInDown 1s ease;
+    }
+
+    .scope-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0 1rem;
+      opacity: 0;
+      animation: fadeIn 1s ease forwards;
+      animation-delay: 0.3s;
+    }
+
+    th, td {
+      padding: 1rem;
+      vertical-align: top;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    th {
+      background: #01c6a0;
+      color: white;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    tr:hover td {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    td {
+      border-bottom: 1px solid #eee;
+    }
+
+    .expand-btn {
+      cursor: pointer;
+      color: #01c6a0;
+      font-weight: bold;
+      display: inline-block;
+      margin-top: 0.5rem;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Responsive Design */
     @media (max-width: 768px) {
-      table {
-        display: block;
-        overflow-x: auto; /* Horizontal scroll for wide tables */
-      }
       th, td {
         font-size: 0.9rem;
-        padding: 0.5rem;
+        padding: 0.75rem;
       }
     }
 
     @media (max-width: 600px) {
-      /* Stack table rows as blocks on very small screens */
+      .scope-table {
+        display: block;
+      }
       thead {
-        display: none; /* Hide headers on small screens */
+        display: none;
       }
       tr {
         display: block;
         margin-bottom: 1rem;
-        border: 1px solid #ccc;
       }
       td {
         display: block;
-        font-size: 0.9rem;
-        padding: 0.5rem;
-        border: none;
-        border-bottom: 1px solid #eee;
         position: relative;
+        padding-left: 35%;
       }
       td::before {
-        content: attr(data-label); /* Use data-label for mobile pseudo-headers */
-        font-weight: bold;
-        display: block;
-        margin-bottom: 0.25rem;
+        content: attr(data-label);
+        position: absolute;
+        left: 1rem;
+        top: 1rem;
+        font-weight: 600;
         color: #01c6a0;
-      }
-      td:last-child {
-        border-bottom: none;
-      }
-    }
-
-    @media (max-width: 400px) {
-      header {
-        padding: 0.75rem;
-      }
-      .container {
-        padding: 0.5rem;
+        text-transform: uppercase;
       }
     }
   </style>
@@ -115,9 +160,9 @@
     514 Boundary Road, Richlands - Post Construction Cleaning - Office Refurbishment
   </header>
   <div class="container">
-    <a href="index.html" class="back">← Home</a>
+    <a href="index.html" class="back-btn">Back to Home</a>
     <h2>Scope of Work</h2>
-    <table>
+    <table class="scope-table">
       <thead>
         <tr>
           <th>Area</th>
@@ -134,6 +179,7 @@
             - Conduct a thorough site inspection to identify access restrictions, hazardous areas, or special cleaning requirements.<br>
             - Confirm all major construction debris and waste have been removed by the builder or contractor.<br>
             - Coordinate with other trades.
+            <span class="expand-btn">Show more</span>
           </td>
           <td data-label="Notes">
             - Ensure all cleaning personnel are inducted and equipped with proper PPE.<br>
@@ -155,6 +201,7 @@
             - Wipe skirting boards, window sills, and horizontal ledges.<br>
             - Dust internal signages, outlets, switches, fans, and AC vents.<br>
             - Spot clean walls and vacuum stairwells (including handrails and balustrades).
+            <span class="expand-btn">Show more</span>
           </td>
           <td data-label="Notes">
             - Pay special attention to areas with heavy construction residue or adhesive marks.<br>
@@ -174,6 +221,7 @@
             - Clean all internal windows including frames, tracks, and sills.<br>
             - Remove protective tape and any adhesive residue.<br>
             - Wipe down glazing panels, partitions, and mirrors.
+            <span class="expand-btn">Show more</span>
           </td>
           <td data-label="Notes">
             - Ensure windows operate smoothly and have a streak-free finish.
@@ -191,6 +239,7 @@
             - Dust and wipe down all joinery such as cabinetry, shelves, and cupboard interiors/exteriors.<br>
             - Clean fixtures including door handles, light switches, and power outlets.<br>
             - Clean basic kitchen surfaces, benchtops, and sinks.
+            <span class="expand-btn">Show more</span>
           </td>
           <td data-label="Notes">
             - In-depth appliance cleaning is not part of the standard scope.
@@ -209,6 +258,7 @@
             - Wipe down vanities, mirrors, towel rails, and soap holders.<br>
             - Clean shower screens and remove any protective stickers.<br>
             - Mop and sanitize tiled/vinyl floors.
+            <span class="expand-btn">Show more</span>
           </td>
           <td data-label="Notes">
             - Emphasize hygiene and sanitation, especially on high-touch surfaces.
@@ -228,6 +278,7 @@
             - Sweep and remove loose dust and debris from balconies and outdoor areas.<br>
             - Lightly wash flooring to remove dust and residue.<br>
             - Remove any construction rubbish.
+            <span class="expand-btn">Show more</span>
           </td>
           <td data-label="Notes">
             - Ensure all outdoor areas are clear of construction waste and ready for use.
@@ -243,4 +294,61 @@
           <td data-label="Task">
             Final Checks & Waste Disposal<br>
             - Place all cleaning-related waste into designated bins.<br>
-            - Ensure the entire site is left tidy and ready
+            - Ensure the entire site is left tidy and ready for inspection.
+            <span class="expand-btn">Show more</span>
+          </td>
+          <td data-label="Notes">
+            - No specialized treatments or deep polishing are included at this stage.
+          </td>
+          <td data-label="Tools">
+            - Waste bins<br>
+            - Disposal bags<br>
+            - Final inspection checklist
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const expandButtons = document.querySelectorAll('.expand-btn');
+
+      expandButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const td = btn.parentElement;
+          if (td.classList.contains('expanded')) {
+            td.classList.remove('expanded');
+            btn.textContent = 'Show more';
+          } else {
+            td.classList.add('expanded');
+            btn.textContent = 'Show less';
+          }
+        });
+      });
+
+      // Add dynamic height adjustment for mobile
+      const style = document.createElement('style');
+      document.head.appendChild(style);
+      style.sheet.insertRule(`
+        td.expanded {
+          max-height: none !important;
+          transition: max-height 0.3s ease;
+        }
+      `);
+
+      // Initial height limitation
+      const tds = document.querySelectorAll('td[data-label="Task"]');
+      tds.forEach(td => {
+        if (td.scrollHeight > 150) {
+          td.style.maxHeight = '150px';
+          td.style.overflow = 'hidden';
+          td.querySelector('.expand-btn').style.display = 'block';
+        } else {
+          td.querySelector('.expand-btn').style.display = 'none';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
