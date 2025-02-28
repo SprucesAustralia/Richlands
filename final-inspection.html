@@ -2,126 +2,357 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <!-- Mobile-first viewport meta tag -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Final Inspection Cleaning Checklist - 514 Boundary Road, Richlands</title>
   <style>
-    /* Mobile-first CSS */
-    body {
+    * {
       margin: 0;
-      font-family: 'Articulat CF', sans-serif;
-      background-color: #ffffff;
-      color: #000;
-      font-size: 1rem; /* default size for mobile */
+      padding: 0;
+      box-sizing: border-box;
     }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #f0f4f9 0%, #e0e8f5 100%);
+      color: #333;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
     header {
-      background-color: #01c6a0;
-      padding: 20px;
+      background: #01c6a0; /* Green header */
+      padding: 1rem;
       text-align: center;
-      color: #fff;
-      font-size: 1.5em;
+      color: white;
+      font-size: 1.2rem;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      transition: transform 0.3s ease;
     }
+
+    header.hidden {
+      transform: translateY(-100%);
+    }
+
     .container {
       max-width: 1080px;
-      margin: auto;
-      padding: 10px;
+      margin: 1.5rem auto;
+      padding: 0 0.5rem;
     }
+
     a.back {
       display: inline-block;
-      margin-bottom: 20px;
+      margin-bottom: 1rem;
       text-decoration: none;
-      color: #01c6a0;
-      font-weight: bold;
-      font-size: 1rem;
-    }
-    h2, h3 {
-      margin-top: 20px;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 20px;
-    }
-    table, th, td {
-      border: 1px solid #ccc;
-    }
-    th, td {
-      padding: 10px;
-      text-align: left;
-      vertical-align: middle;
+      color: #01c6a0; /* Green */
+      font-weight: 600;
+      padding: 8px 16px;
+      border: 2px solid #01c6a0; /* Green */
+      border-radius: 5px;
       font-size: 0.9rem;
+      transition: all 0.3s ease;
     }
-    input[type="text"] {
+
+    a.back:hover {
+      background-color: #01c6a0; /* Green */
+      color: #fff;
+      transform: translateX(-5px);
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      color: #01c6a0; /* Green */
+      text-align: center;
+      margin: 1rem 0;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+      animation: fadeInDown 1s ease;
+    }
+
+    .info-section {
+      background: white;
+      border-radius: 10px; /* Increased for a nicer look */
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); /* Deeper shadow for elegance */
+      padding: 1.5rem; /* Increased padding for spaciousness */
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: slideUp 1s ease forwards;
+      animation-delay: 0.2s;
+      transition: all 0.3s ease;
+    }
+
+    .info-section label {
+      display: block;
+      font-weight: 600;
+      color: #01c6a0; /* Green for labels */
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem; /* Slightly larger for emphasis */
+      text-transform: uppercase; /* Added for a professional touch */
+      letter-spacing: 1px;
+    }
+
+    .info-section input[type="text"],
+    .info-section input[type="date"] {
       width: 100%;
       box-sizing: border-box;
       font-size: 1rem;
-      padding: 5px;
+      padding: 10px; /* Increased padding for better touch */
+      border: 2px solid #ddd; /* Thicker border for a cleaner look */
+      border-radius: 6px; /* Increased radius for softer edges */
+      margin-bottom: 1rem; /* Increased margin for spacing */
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
     }
-    /* Hide native file input */
+
+    .info-section input[type="text"]:focus,
+    .info-section input[type="date"]:focus {
+      border-color: #01c6a0; /* Green */
+      outline: none;
+      box-shadow: 0 0 8px rgba(1, 198, 160, 0.3); /* Subtle green glow on focus */
+    }
+
+    .checklist-section {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      margin-bottom: 1rem;
+      padding: 0.8rem;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 0;
+      font-size: 1rem;
+      color: #01c6a0; /* Green */
+      font-weight: 600;
+    }
+
+    .section-header .show-more-btn {
+      padding: 6px 12px;
+      cursor: pointer;
+      background-color: #01c6a0; /* Green */
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 0.8rem;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .section-header .show-more-btn:hover {
+      background-color: #019f82; /* Darker green for hover */
+      transform: scale(1.05);
+    }
+
+    .tasks {
+      display: none;
+      padding: 0.5rem 0;
+      animation: slideDown 0.5s ease;
+    }
+
+    .tasks.expanded {
+      display: block;
+    }
+
+    .task-item {
+      margin-bottom: 0.5rem;
+      padding: 0.5rem;
+      background: #f9f9f9;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+    }
+
+    .task-item input[type="checkbox"] {
+      margin-right: 0.5rem;
+      vertical-align: middle;
+    }
+
+    .task-label {
+      font-weight: 500;
+      color: #333;
+      display: inline;
+    }
+
+    .upload-section {
+      margin-top: 0.8rem;
+      padding: 0.5rem;
+      background: #f9f9f9;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+    }
+
+    .upload-label {
+      display: block;
+      color: #666;
+      font-size: 0.9rem;
+      margin-bottom: 0.3rem;
+    }
+
     input[type="file"] {
       display: none;
     }
-    /* Styled file upload button */
+
     .custom-file-upload {
       display: inline-block;
-      padding: 12px 20px;
+      padding: 6px 12px;
       cursor: pointer;
-      background-color: #28a745;
+      background-color: #01c6a0; /* Green */
       color: #fff;
+      border: none;
       border-radius: 5px;
-      font-size: 1rem;
-      min-width: 44px;
-      min-height: 44px;
-      text-align: center;
-      margin-bottom: 5px;
+      font-size: 0.8rem;
+      transition: background-color 0.3s ease, transform 0.3s ease;
     }
+
     .custom-file-upload:hover {
-      background-color: #218838;
+      background-color: #019f82; /* Darker green for hover */
+      transform: scale(1.05);
     }
+
+    .file-name {
+      display: block;
+      margin-top: 0.3rem;
+      font-size: 0.8rem;
+      color: #666;
+    }
+
     .preview {
       display: block;
-      margin-top: 10px;
-      max-width: 100px;
-      max-height: 100px;
+      margin-top: 0.5rem;
+      max-width: 80px;
+      max-height: 80px;
+      border-radius: 5px;
+      box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+      transition: opacity 0.3s ease;
     }
+
     button.submit-btn {
-      background-color: #01c6a0;
+      background-color: #01c6a0; /* Green */
       color: #fff;
-      padding: 12px 20px;
+      padding: 10px 20px;
       border: none;
       border-radius: 5px;
       cursor: pointer;
       font-size: 1rem;
       width: 100%;
-      min-height: 44px;
+      margin-top: 1rem;
+      transition: background-color 0.3s ease, transform 0.3s ease;
     }
-    /* Media queries for larger screens */
+
+    button.submit-btn:hover {
+      background-color: #019f82; /* Darker green for hover */
+      transform: scale(1.05);
+    }
+
+    /* Animations */
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideDown {
+      from { max-height: 0; opacity: 0; }
+      to { max-height: 300px; opacity: 1; }
+    }
+
+    /* Responsive Design */
     @media (min-width: 768px) {
-      body {
-        font-size: 1.2rem; /* slightly larger for tablets and desktops */
+      header {
+        padding: 1.5rem;
+        font-size: 1.5rem;
       }
-      th, td {
+
+      .container {
+        padding: 0 1rem;
+        margin: 2rem auto;
+      }
+
+      a.back {
+        font-size: 1rem;
+        padding: 10px 20px;
+        margin-bottom: 2rem;
+      }
+
+      h2 {
+        font-size: 2.5rem;
+        margin: 2rem 0;
+      }
+
+      .info-section {
+        padding: 2rem; /* Increased for desktop */
+        margin-bottom: 2rem;
+      }
+
+      .info-section label {
+        font-size: 1.2rem;
+        margin-bottom: 0.8rem;
+      }
+
+      .info-section input[type="text"],
+      .info-section input[type="date"] {
+        font-size: 1.2rem;
+        padding: 12px; /* Increased for desktop */
+        margin-bottom: 1.5rem; /* Increased for desktop */
+      }
+
+      .checklist-section {
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      }
+
+      .section-header {
+        padding: 1rem 0;
+        font-size: 1.2rem;
+      }
+
+      .section-header .show-more-btn {
+        padding: 8px 16px;
         font-size: 1rem;
       }
-    }
-    /* Mobile-friendly table stacking for small screens */
-    @media (max-width: 768px) {
-      table, thead, tbody, th, td, tr {
-        display: block;
-        width: 100%;
+
+      .tasks {
+        padding: 1rem 0;
       }
-      tr {
-        margin-bottom: 15px;
+
+      .task-item {
+        padding: 1rem;
+        margin-bottom: 1rem;
       }
-      th, td {
-        text-align: left;
-        padding: 8px;
-        border: none;
-        border-bottom: 1px solid #ccc;
+
+      .task-item input[type="checkbox"] {
+        margin-right: 1rem;
       }
-      th {
-        background-color: #f4f4f4;
-        font-weight: bold;
+
+      .upload-section {
+        padding: 1rem;
+      }
+
+      .upload-label {
+        font-size: 1rem;
+      }
+
+      .custom-file-upload, button.submit-btn {
+        font-size: 1rem;
+        padding: 10px 20px;
+      }
+
+      .file-name {
+        font-size: 1rem;
+      }
+
+      .preview {
+        max-width: 150px;
+        max-height: 150px;
+        margin-top: 1rem;
       }
     }
   </style>
@@ -131,314 +362,265 @@
     514 Boundary Road, Richlands - Post Construction Cleaning - Office Refurbishment
   </header>
   <div class="container">
-    <a href="index.html" class="back">&larr; Home</a>
+    <a href="index.html" class="back">← Home</a>
     <h2>Final Inspection Cleaning Checklist</h2>
+    <div class="info-section">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" placeholder="Enter your name" required>
+      <label for="inspection_date">Inspection Date:</label>
+      <input type="date" id="inspection_date" name="inspection_date" required>
+    </div>
     <form id="inspectionForm">
       <!-- Section 1: General Internal Areas -->
-      <h3>1. General Internal Areas</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Item</th>
-            <th>Comments</th>
-            <th>Upload Photo</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Floors (all debris/dust removed, no stains or footprints)</td>
-            <td><input type="text" name="floors_comments"></td>
-            <td>
-              <label class="custom-file-upload" for="floors_file">Upload Photo</label>
-              <input type="file" id="floors_file" accept="image/*" onchange="previewImage(event, 'floors_preview')">
-              <img id="floors_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
-            </td>
-          </tr>
-          <tr>
-            <td>Carpets (vacuumed, spot‐cleaned)</td>
-            <td><input type="text" name="carpets_comments"></td>
-            <td>
-              <label class="custom-file-upload" for="carpets_file">Upload Photo</label>
-              <input type="file" id="carpets_file" accept="image/*" onchange="previewImage(event, 'carpets_preview')">
-              <img id="carpets_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
-            </td>
-          </tr>
-          <tr>
-            <td>Walls and Ceilings (no dust, smudges, or marks)</td>
-            <td><input type="text" name="walls_comments"></td>
-            <td>
-              <label class="custom-file-upload" for="walls_file">Upload Photo</label>
-              <input type="file" id="walls_file" accept="image/*" onchange="previewImage(event, 'walls_preview')">
-              <img id="walls_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
-            </td>
-          </tr>
-          <tr>
-            <td>Doors, Door Frames, Handles (clean, stickers removed)</td>
-            <td><input type="text" name="doors_comments"></td>
-            <td>
-              <label class="custom-file-upload" for="doors_file">Upload Photo</label>
-              <input type="file" id="doors_file" accept="image/*" onchange="previewImage(event, 'doors_preview')">
-              <img id="doors_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
-            </td>
-          </tr>
-          <tr>
-            <td>Skirting Boards, Window Sills, Ledges (dust‐free)</td>
-            <td><input type="text" name="skirting_comments"></td>
-            <td>
-              <label class="custom-file-upload" for="skirting_file">Upload Photo</label>
-              <input type="file" id="skirting_file" accept="image/*" onchange="previewImage(event, 'skirting_preview')">
-              <img id="skirting_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
-            </td>
-          </tr>
-          <tr>
-            <td>Air Vents, Fans, Light Fittings (dust‐free)</td>
-            <td><input type="text" name="air_comments"></td>
-            <td>
-              <label class="custom-file-upload" for="air_file">Upload Photo</label>
-              <input type="file" id="air_file" accept="image/*" onchange="previewImage(event, 'air_preview')">
-              <img id="air_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
-            </td>
-          </tr>
-          <tr>
-            <td>Outlets and Switches (dust‐free, no residue)</td>
-            <td><input type="text" name="outlets_comments"></td>
-            <td>
-              <label class="custom-file-upload" for="outlets_file">Upload Photo</label>
-              <input type="file" id="outlets_file" accept="image/*" onchange="previewImage(event, 'outlets_preview')">
-              <img id="outlets_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      
+      <div class="checklist-section">
+        <div class="section-header">
+          1. General Internal Areas
+          <button class="show-more-btn" type="button">Show More</button>
+        </div>
+        <div class="tasks">
+          <div class="task-item">
+            <input type="checkbox" name="general_internal_floors" id="general_internal_floors">
+            <label class="task-label" for="general_internal_floors">Floors (all debris/dust removed, no stains or footprints)</label>
+          </div>
+          <div class="task-item">
+            <input type="checkbox" name="general_internal_carpets" id="general_internal_carpets">
+            <label class="task-label" for="general_internal_carpets">Carpets (vacuumed, spot‐cleaned)</label>
+          </div>
+          <div class="task-item">
+            <input type="checkbox" name="general_internal_walls" id="general_internal_walls">
+            <label class="task-label" for="general_internal_walls">Walls and Ceilings (no dust, smudges, or marks)</label>
+          </div>
+          <div class="task-item">
+            <input type="checkbox" name="general_internal_doors" id="general_internal_doors">
+            <label class="task-label" for="general_internal_doors">Doors, Door Frames, Handles (clean, stickers removed)</label>
+          </div>
+          <div class="task-item">
+            <input type="checkbox" name="general_internal_skirting" id="general_internal_skirting">
+            <label class="task-label" for="general_internal_skirting">Skirting Boards, Window Sills, Ledges (dust‐free)</label>
+          </div>
+          <div class="task-item">
+            <input type="checkbox" name="general_internal_air_vents" id="general_internal_air_vents">
+            <label class="task-label" for="general_internal_air_vents">Air Vents, Fans, Light Fittings (dust‐free)</label>
+          </div>
+          <div class="task-item">
+            <input type="checkbox" name="general_internal_outlets" id="general_internal_outlets">
+            <label class="task-label" for="general_internal_outlets">Outlets and Switches (dust‐free, no residue)</label>
+          </div>
+        </div>
+        <div class="upload-section">
+          <span class="upload-label">Upload Photo:</span>
+          <label class="custom-file-upload" for="general_internal_file">Upload Photo</label>
+          <input type="file" id="general_internal_file" accept="image/*" onchange="updateFileName(event, 'general_internal_file_name'), previewImage(event, 'general_internal_preview')">
+          <span id="general_internal_file_name" class="file-name">No file chosen</span>
+          <img id="general_internal_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
+        </div>
+      </div>
+
       <!-- Section 2: Windows & Glazing -->
-      <h3>2. Windows &amp; Glazing</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Item</th>
-            <th>Comments</th>
-            <th>Upload Photo</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Window Glass (streak‐free, no adhesive residue)</td>
-            <td><input type="text" name="windowGlass_comments"></td>
-            <td>
-              <label class="custom-file-upload" for="windowGlass_file">Upload Photo</label>
-              <input type="file" id="windowGlass_file" accept="image/*" onchange="previewImage(event, 'windowGlass_preview')">
-              <img id="windowGlass_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
-            </td>
-          </tr>
-          <tr>
-            <td>Window Frames, Tracks, Sills (clean, debris removed)</td>
-            <td><input type="text" name="windowFrames_comments"></td>
-            <td>
-              <label class="custom-file-upload" for="windowFrames_file">Upload Photo</label>
-              <input type="file" id="windowFrames_file" accept="image/*" onchange="previewImage(event, 'windowFrames_preview')">
-              <img id="windowFrames_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
-            </td>
-          </tr>
-          <tr>
-            <td>Internal Glazing Panels, Partitions, Mirrors (streak‐free)</td>
-            <td><input type="text" name="internalGlazing_comments"></td>
-            <td>
-              <label class="custom-file-upload" for="internalGlazing_file">Upload Photo</label>
-              <input type="file" id="internalGlazing_file" accept="image/*" onchange="previewImage(event, 'internalGlazing_preview')">
-              <img id="internalGlazing_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      
+      <div class="checklist-section">
+        <div class="section-header">
+          2. Windows & Glazing
+          <button class="show-more-btn" type="button">Show More</button>
+        </div>
+        <div class="tasks">
+          <div class="task-item">
+            <input type="checkbox" name="windows_glazing_glass" id="windows_glazing_glass">
+            <label class="task-label" for="windows_glazing_glass">Window Glass (streak‐free, no adhesive residue)</label>
+          </div>
+          <div class="task-item">
+            <input type="checkbox" name="windows_glazing_frames" id="windows_glazing_frames">
+            <label class="task-label" for="windows_glazing_frames">Window Frames, Tracks, Sills (clean, debris removed)</label>
+          </div>
+          <div class="task-item">
+            <input type="checkbox" name="windows_glazing_panels" id="windows_glazing_panels">
+            <label class="task-label" for="windows_glazing_panels">Internal Glazing Panels, Partitions, Mirrors (streak‐free)</label>
+          </div>
+        </div>
+        <div class="upload-section">
+          <span class="upload-label">Upload Photo:</span>
+          <label class="custom-file-upload" for="windows_glazing_file">Upload Photo</label>
+          <input type="file" id="windows_glazing_file" accept="image/*" onchange="updateFileName(event, 'windows_glazing_file_name'), previewImage(event, 'windows_glazing_preview')">
+          <span id="windows_glazing_file_name" class="file-name">No file chosen</span>
+          <img id="windows_glazing_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
+        </div>
+      </div>
+
       <!-- Section 3: Joinery & Fixtures -->
-      <h3>3. Joinery &amp; Fixtures</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Item</th>
-            <th>Comments</th>
-            <th>Upload Photo</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Cabinetry, Shelves, Cupboards (interior/exterior dust‐free)</td>
-            <td><input type="text" name="cabinetry_comments"></td>
-            <td>
-              <label class="custom-file-upload" for="cabinetry_file">Upload Photo</label>
-              <input type="file" id="cabinetry_file" accept="image/*" onchange="previewImage(event, 'cabinetry_preview')">
-              <img id="cabinetry_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
-            </td>
-          </tr>
-          <tr>
-            <td>Door Handles, Light Switches, Power Outlets (wiped clean)</td>
-            <td><input type="text" name="doorHandles_comments"></td>
-            <td>
-              <label class="custom-file-upload" for="doorHandles_file">Upload Photo</label>
-              <input type="file" id="doorHandles_file" accept="image/*" onchange="previewImage(event, 'doorHandles_preview')">
-              <img id="doorHandles_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
-            </td>
-          </tr>
-          <tr>
-            <td>Kitchen Surfaces, Benchtops, Sinks (clean, no stains/residue)</td>
-            <td><input type="text" name="kitchenSurfaces_comments"></td>
-            <td>
-              <label class="custom-file-upload" for="kitchenSurfaces_file">Upload Photo</label>
-              <input type="file" id="kitchenSurfaces_file" accept="image/*" onchange="previewImage(event, 'kitchenSurfaces_preview')">
-              <img id="kitchenSurfaces_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      
+      <div class="checklist-section">
+        <div class="section-header">
+          3. Joinery & Fixtures
+          <button class="show-more-btn" type="button">Show More</button>
+        </div>
+        <div class="tasks">
+          <div class="task-item">
+            <input type="checkbox" name="joinery_fixtures_cabinetry" id="joinery_fixtures_cabinetry">
+            <label class="task-label" for="joinery_fixtures_cabinetry">Cabinetry, Shelves, Cupboards (interior/exterior dust‐free)</label>
+          </div>
+          <div class="task-item">
+            <input type="checkbox" name="joinery_fixtures_handles" id="joinery_fixtures_handles">
+            <label class="task-label" for="joinery_fixtures_handles">Door Handles, Light Switches, Power Outlets (wiped clean)</label>
+          </div>
+          <div class="task-item">
+            <input type="checkbox" name="joinery_fixtures_kitchen" id="joinery_fixtures_kitchen">
+            <label class="task-label" for="joinery_fixtures_kitchen">Kitchen Surfaces, Benchtops, Sinks (clean, no stains/residue)</label>
+          </div>
+        </div>
+        <div class="upload-section">
+          <span class="upload-label">Upload Photo:</span>
+          <label class="custom-file-upload" for="joinery_fixtures_file">Upload Photo</label>
+          <input type="file" id="joinery_fixtures_file" accept="image/*" onchange="updateFileName(event, 'joinery_fixtures_file_name'), previewImage(event, 'joinery_fixtures_preview')">
+          <span id="joinery_fixtures_file_name" class="file-name">No file chosen</span>
+          <img id="joinery_fixtures_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
+        </div>
+      </div>
+
       <!-- Section 4: Sanitary Areas -->
-      <h3>4. Sanitary Areas (Bathrooms, Powder Rooms, Amenities)</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Item</th>
-            <th>Comments</th>
-            <th>Upload Photo</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Toilets, Urinals (disinfected, free of stains/odors)</td>
-            <td><input type="text" name="toilets_comments"></td>
-            <td>
-              <label class="custom-file-upload" for="toilets_file">Upload Photo</label>
-              <input type="file" id="toilets_file" accept="image/*" onchange="previewImage(event, 'toilets_preview')">
-              <img id="toilets_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
-            </td>
-          </tr>
-          <tr>
-            <td>Sinks, Taps (clean, disinfected)</td>
-            <td><input type="text" name="sinks_comments"></td>
-            <td>
-              <label class="custom-file-upload" for="sinks_file">Upload Photo</label>
-              <input type="file" id="sinks_file" accept="image/*" onchange="previewImage(event, 'sinks_preview')">
-              <img id="sinks_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
-            </td>
-          </tr>
-          <tr>
-            <td>Vanities, Mirrors, Towel Rails, Soap Holders (clean, streak‐free)</td>
-            <td><input type="text" name="vanities_comments"></td>
-            <td>
-              <label class="custom-file-upload" for="vanities_file">Upload Photo</label>
-              <input type="file" id="vanities_file" accept="image/*" onchange="previewImage(event, 'vanities_preview')">
-              <img id="vanities_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
-            </td>
-          </tr>
-          <tr>
-            <td>Shower Screens (clean, stickers removed)</td>
-            <td><input type="text" name="showerScreens_comments"></td>
-            <td>
-              <label class="custom-file-upload" for="showerScreens_file">Upload Photo</label>
-              <input type="file" id="showerScreens_file" accept="image/*" onchange="previewImage(event, 'showerScreens_preview')">
-              <img id="showerScreens_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
-            </td>
-          </tr>
-          <tr>
-            <td>Floors (mopped, disinfected, no residue)</td>
-            <td><input type="text" name="floorsDisinfected_comments"></td>
-            <td>
-              <label class="custom-file-upload" for="floorsDisinfected_file">Upload Photo</label>
-              <input type="file" id="floorsDisinfected_file" accept="image/*" onchange="previewImage(event, 'floorsDisinfected_preview')">
-              <img id="floorsDisinfected_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      
+      <div class="checklist-section">
+        <div class="section-header">
+          4. Sanitary Areas (Bathrooms, Powder Rooms, Amenities)
+          <button class="show-more-btn" type="button">Show More</button>
+        </div>
+        <div class="tasks">
+          <div class="task-item">
+            <input type="checkbox" name="sanitary_areas_toilets" id="sanitary_areas_toilets">
+            <label class="task-label" for="sanitary_areas_toilets">Toilets, Urinals (disinfected, free of stains/odors)</label>
+          </div>
+          <div class="task-item">
+            <input type="checkbox" name="sanitary_areas_sinks" id="sanitary_areas_sinks">
+            <label class="task-label" for="sanitary_areas_sinks">Sinks, Taps (clean, disinfected)</label>
+          </div>
+          <div class="task-item">
+            <input type="checkbox" name="sanitary_areas_vanities" id="sanitary_areas_vanities">
+            <label class="task-label" for="sanitary_areas_vanities">Vanities, Mirrors, Towel Rails, Soap Holders (clean, streak‐free)</label>
+          </div>
+          <div class="task-item">
+            <input type="checkbox" name="sanitary_areas_shower" id="sanitary_areas_shower">
+            <label class="task-label" for="sanitary_areas_shower">Shower Screens (clean, stickers removed)</label>
+          </div>
+          <div class="task-item">
+            <input type="checkbox" name="sanitary_areas_floors" id="sanitary_areas_floors">
+            <label class="task-label" for="sanitary_areas_floors">Floors (mopped, disinfected, no residue)</label>
+          </div>
+        </div>
+        <div class="upload-section">
+          <span class="upload-label">Upload Photo:</span>
+          <label class="custom-file-upload" for="sanitary_areas_file">Upload Photo</label>
+          <input type="file" id="sanitary_areas_file" accept="image/*" onchange="updateFileName(event, 'sanitary_areas_file_name'), previewImage(event, 'sanitary_areas_preview')">
+          <span id="sanitary_areas_file_name" class="file-name">No file chosen</span>
+          <img id="sanitary_areas_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
+        </div>
+      </div>
+
       <!-- Section 5: Balconies, Patios & External Areas -->
-      <h3>5. Balconies, Patios &amp; External Areas</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Item</th>
-            <th>Comments</th>
-            <th>Upload Photo</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Floors (swept, washed, free of construction debris)</td>
-            <td><input type="text" name="balconyFloors_comments"></td>
-            <td>
-              <label class="custom-file-upload" for="balconyFloors_file">Upload Photo</label>
-              <input type="file" id="balconyFloors_file" accept="image/*" onchange="previewImage(event, 'balconyFloors_preview')">
-              <img id="balconyFloors_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
-            </td>
-          </tr>
-          <tr>
-            <td>Rubbish Removal (all construction trash cleared)</td>
-            <td><input type="text" name="rubbishRemoval_comments"></td>
-            <td>
-              <label class="custom-file-upload" for="rubbishRemoval_file">Upload Photo</label>
-              <input type="file" id="rubbishRemoval_file" accept="image/*" onchange="previewImage(event, 'rubbishRemoval_preview')">
-              <img id="rubbishRemoval_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
-            </td>
-          </tr>
-          <tr>
-            <td>Overall Appearance (tidy, ready for inspection)</td>
-            <td><input type="text" name="overallAppearance_comments"></td>
-            <td>
-              <label class="custom-file-upload" for="overallAppearance_file">Upload Photo</label>
-              <input type="file" id="overallAppearance_file" accept="image/*" onchange="previewImage(event, 'overallAppearance_preview')">
-              <img id="overallAppearance_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      
+      <div class="checklist-section">
+        <div class="section-header">
+          5. Balconies, Patios & External Areas
+          <button class="show-more-btn" type="button">Show More</button>
+        </div>
+        <div class="tasks">
+          <div class="task-item">
+            <input type="checkbox" name="external_areas_floors" id="external_areas_floors">
+            <label class="task-label" for="external_areas_floors">Floors (swept, washed, free of construction debris)</label>
+          </div>
+          <div class="task-item">
+            <input type="checkbox" name="external_areas_rubbish" id="external_areas_rubbish">
+            <label class="task-label" for="external_areas_rubbish">Rubbish Removal (all construction trash cleared)</label>
+          </div>
+          <div class="task-item">
+            <input type="checkbox" name="external_areas_appearance" id="external_areas_appearance">
+            <label class="task-label" for="external_areas_appearance">Overall Appearance (tidy, ready for inspection)</label>
+          </div>
+        </div>
+        <div class="upload-section">
+          <span class="upload-label">Upload Photo:</span>
+          <label class="custom-file-upload" for="external_areas_file">Upload Photo</label>
+          <input type="file" id="external_areas_file" accept="image/*" onchange="updateFileName(event, 'external_areas_file_name'), previewImage(event, 'external_areas_preview')">
+          <span id="external_areas_file_name" class="file-name">No file chosen</span>
+          <img id="external_areas_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
+        </div>
+      </div>
+
       <!-- Section 6: Final Checks & Waste Disposal -->
-      <h3>6. Final Checks &amp; Waste Disposal</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Item</th>
-            <th>Comments</th>
-            <th>Upload Photo</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>All Cleaning‐Related Waste in Designated Bins</td>
-            <td><input type="text" name="wasteBins_comments"></td>
-            <td>
-              <label class="custom-file-upload" for="wasteBins_file">Upload Photo</label>
-              <input type="file" id="wasteBins_file" accept="image/*" onchange="previewImage(event, 'wasteBins_preview')">
-              <img id="wasteBins_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
-            </td>
-          </tr>
-          <tr>
-            <td>No Specialized Treatments/Deep Polishing (excluded unless specified)</td>
-            <td><input type="text" name="noSpecialized_comments"></td>
-            <td>
-              <label class="custom-file-upload" for="noSpecialized_file">Upload Photo</label>
-              <input type="file" id="noSpecialized_file" accept="image/*" onchange="previewImage(event, 'noSpecialized_preview')">
-              <img id="noSpecialized_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
-            </td>
-          </tr>
-          <tr>
-            <td>Overall Site Condition (ready for handover/inspection)</td>
-            <td><input type="text" name="overallSiteCondition_comments"></td>
-            <td>
-              <label class="custom-file-upload" for="overallSiteCondition_file">Upload Photo</label>
-              <input type="file" id="overallSiteCondition_file" accept="image/*" onchange="previewImage(event, 'overallSiteCondition_preview')">
-              <img id="overallSiteCondition_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      
+      <div class="checklist-section">
+        <div class="section-header">
+          6. Final Checks & Waste Disposal
+          <button class="show-more-btn" type="button">Show More</button>
+        </div>
+        <div class="tasks">
+          <div class="task-item">
+            <input type="checkbox" name="final_checks_waste" id="final_checks_waste">
+            <label class="task-label" for="final_checks_waste">All Cleaning‐Related Waste in Designated Bins</label>
+          </div>
+          <div class="task-item">
+            <input type="checkbox" name="final_checks_treatments" id="final_checks_treatments">
+            <label class="task-label" for="final_checks_treatments">No Specialized Treatments/Deep Polishing (excluded unless specified)</label>
+          </div>
+          <div class="task-item">
+            <input type="checkbox" name="final_checks_condition" id="final_checks_condition">
+            <label class="task-label" for="final_checks_condition">Overall Site Condition (ready for handover/inspection)</label>
+          </div>
+        </div>
+        <div class="upload-section">
+          <span class="upload-label">Upload Photo:</span>
+          <label class="custom-file-upload" for="final_checks_file">Upload Photo</label>
+          <input type="file" id="final_checks_file" accept="image/*" onchange="updateFileName(event, 'final_checks_file_name'), previewImage(event, 'final_checks_preview')">
+          <span id="final_checks_file_name" class="file-name">No file chosen</span>
+          <img id="final_checks_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
+        </div>
+      </div>
+
       <button type="submit" class="submit-btn">Submit</button>
     </form>
   </div>
-  
+
   <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Header hide/show on scroll
+      let lastScroll = 0;
+      const header = document.querySelector('header');
+
+      window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+
+        if (currentScroll > lastScroll && currentScroll > 50) {
+          // Scrolling down
+          header.classList.add('hidden');
+        } else {
+          // Scrolling up
+          header.classList.remove('hidden');
+        }
+        lastScroll = currentScroll;
+      });
+
+      // Collapsible sections
+      const showMoreButtons = document.querySelectorAll('.show-more-btn');
+
+      showMoreButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const tasks = btn.closest('.section-header').nextElementSibling;
+          const isExpanded = btn.classList.toggle('expanded');
+          tasks.classList.toggle('expanded');
+          btn.textContent = isExpanded ? 'Show Less' : 'Show More';
+        });
+      });
+
+      // Delay animations for checklist sections
+      const sections = document.querySelectorAll('.checklist-section');
+      sections.forEach((section, index) => {
+        section.style.animationDelay = `${0.3 + index * 0.2}s`;
+      });
+    });
+
+    function updateFileName(event, fileNameId) {
+      const input = event.target;
+      const fileNameSpan = document.getElementById(fileNameId);
+      if (input.files && input.files[0]) {
+        fileNameSpan.textContent = input.files[0].name.length > 20 ? input.files[0].name.substring(0, 20) + '...' : input.files[0].name;
+      } else {
+        fileNameSpan.textContent = 'No file chosen';
+      }
+    }
+
     function previewImage(event, previewId) {
       const input = event.target;
       const preview = document.getElementById(previewId);
@@ -447,14 +629,22 @@
         reader.onload = function(e) {
           preview.src = e.target.result;
           preview.style.display = 'block';
+          preview.style.opacity = 0;
+          setTimeout(() => {
+            preview.style.opacity = 1;
+          }, 100);
         };
         reader.readAsDataURL(input.files[0]);
       }
     }
-    
+
     document.getElementById('inspectionForm').addEventListener('submit', function(e) {
       e.preventDefault();
-      alert('Inspection form submitted!');
+      const name = document.getElementById('name').value;
+      const inspectionDate = document.getElementById('inspection_date').value;
+      const checkedTasks = Array.from(document.querySelectorAll('input[type="checkbox"]:checked'))
+        .map(cb => cb.name).join(', ');
+      alert(`Inspection form submitted!\nName: ${name}\nDate: ${inspectionDate}\nChecked Tasks: ${checkedTasks}`);
     });
   </script>
 </body>
