@@ -5,62 +5,159 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Home - 514 Boundary Road, Richlands - Post Construction Cleaning - Office Refurbishment</title>
   <style>
-    body {
+    * {
       margin: 0;
-      font-family: 'Articulat CF', sans-serif;
-      background-color: #ffffff;
-      color: #000;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif; /* Changed to a widely supported font for consistency */
+      background: linear-gradient(135deg, #f0f4f9 0%, #e0e8f5 100%); /* Light gradient for a modern look */
+      color: #333;
       line-height: 1.6;
+      overflow-x: hidden;
     }
+
     header {
-      background-color: #01c6a0;
-      padding: 1rem;
+      background: #01c6a0; /* Green header */
+      padding: 1.5rem;
       text-align: center;
-      color: #fff;
-      font-size: clamp(1.2rem, 4vw, 1.5rem);
+      color: white;
+      font-size: clamp(1.2rem, 4vw, 2rem); /* Adjusted for better scaling */
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Deeper shadow for elegance */
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      transition: transform 0.3s ease;
     }
+
+    header.hidden {
+      transform: translateY(-100%);
+    }
+
     .container {
       max-width: 1200px;
-      margin: 0 auto;
-      padding: 1rem;
-      text-align: center;
-      min-height: calc(100vh - 4rem); /* Ensures container fills viewport minus header */
+      margin: 2rem auto;
+      padding: 0 1rem;
+      min-height: calc(100vh - 4rem);
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
+      text-align: center;
     }
+
+    h1 {
+      font-size: 2.5rem;
+      color: #01c6a0; /* Green */
+      margin-bottom: 2rem;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+      animation: fadeInDown 1s ease;
+    }
+
     .nav-buttons {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 1rem;
-      margin: 1.5rem 0;
-    }
-    .nav-buttons a {
-      background-color: #01c6a0;
-      color: #fff;
-      text-decoration: none;
-      padding: 0.75rem 1.5rem;
-      border-radius: 5px;
-      width: 100%;
-      max-width: 300px;
-      text-align: center;
-      transition: background-color 0.3s ease;
-    }
-    .nav-buttons a:hover {
-      background-color: #019f82;
+      gap: 1.5rem; /* Increased for better spacing */
+      margin: 2rem 0;
+      opacity: 0;
+      animation: slideUp 1s ease forwards;
+      animation-delay: 0.3s;
     }
 
-    /* Responsive adjustments */
+    .nav-buttons a {
+      background-color: #01c6a0; /* Green */
+      color: #fff;
+      text-decoration: none;
+      padding: 1rem 2rem; /* Increased for better touch */
+      border-radius: 8px; /* Increased for softer edges */
+      width: 100%;
+      max-width: 350px; /* Slightly wider for better readability */
+      font-size: 1.1rem; /* Larger font for clarity */
+      font-weight: 600;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+      transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .nav-buttons a:hover {
+      background-color: #019f82; /* Darker green for hover */
+      transform: translateY(-3px); /* Slight lift on hover */
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+    }
+
+    .nav-buttons a:active {
+      transform: translateY(0); /* Reset on click */
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Animations */
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      header {
+        padding: 1rem;
+        font-size: 1.2rem;
+      }
+
+      .container {
+        margin: 1.5rem auto;
+        padding: 0 0.5rem;
+      }
+
+      h1 {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .nav-buttons {
+        gap: 1rem;
+        margin: 1.5rem 0;
+      }
+
+      .nav-buttons a {
+        padding: 0.8rem 1.5rem;
+        max-width: 280px;
+        font-size: 1rem;
+      }
+    }
+
     @media (max-width: 600px) {
       header {
         padding: 0.75rem;
+        font-size: 1rem;
       }
+
       .container {
+        margin: 1rem auto;
         padding: 0.5rem;
       }
+
+      h1 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .nav-buttons {
+        gap: 0.8rem;
+        margin: 1rem 0;
+      }
+
       .nav-buttons a {
-        width: 90%;
+        padding: 0.6rem 1rem;
+        max-width: 240px;
+        font-size: 0.9rem;
       }
     }
   </style>
@@ -70,6 +167,7 @@
     514 Boundary Road, Richlands - Post Construction Cleaning - Office Refurbishment
   </header>
   <div class="container">
+    <h1>Cleaner Guidance Center</h1>
     <div class="nav-buttons">
       <a href="scope-of-work.html">Scope of Work</a>
       <a href="booking-details.html">Booking Details</a>
@@ -77,5 +175,26 @@
       <a href="final-inspection.html">Final Inspection Cleaning Checklist</a>
     </div>
   </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Header hide/show on scroll
+      let lastScroll = 0;
+      const header = document.querySelector('header');
+
+      window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+
+        if (currentScroll > lastScroll && currentScroll > 50) {
+          // Scrolling down
+          header.classList.add('hidden');
+        } else {
+          // Scrolling up
+          header.classList.remove('hidden');
+        }
+        lastScroll = currentScroll;
+      });
+    });
+  </script>
 </body>
 </html>
