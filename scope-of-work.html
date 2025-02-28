@@ -29,6 +29,11 @@
       position: sticky;
       top: 0;
       z-index: 10;
+      transition: transform 0.3s ease;
+    }
+
+    header.hidden {
+      transform: translateY(-100%);
     }
 
     .container {
@@ -44,11 +49,15 @@
       text-decoration: none;
       color: #01c6a0;
       font-weight: 600;
+      padding: 10px 20px;
+      border: 2px solid #01c6a0;
+      border-radius: 5px;
       transition: all 0.3s ease;
     }
 
     .back-btn:hover {
-      color: #019f82;
+      background-color: #01c6a0;
+      color: #fff;
       transform: translateX(-5px);
     }
 
@@ -58,64 +67,78 @@
     }
 
     h2 {
-      font-size: 2rem;
+      font-size: 2.5rem;
       color: #01c6a0;
       text-align: center;
-      margin-bottom: 2rem;
+      margin-bottom: 2.5rem;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
       animation: fadeInDown 1s ease;
     }
 
     .scope-table {
       width: 100%;
       border-collapse: separate;
-      border-spacing: 0 1rem;
+      border-spacing: 0 1.5rem;
       opacity: 0;
-      animation: fadeIn 1s ease forwards;
+      animation: slideUp 1s ease forwards;
       animation-delay: 0.3s;
     }
 
     th, td {
-      padding: 1rem;
+      padding: 1.2rem 1.5rem;
       vertical-align: top;
       background: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
     th {
       background: #01c6a0;
       color: white;
-      font-weight: 600;
+      font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 1.5px;
+      border-radius: 10px 10px 0 0;
     }
 
     tr:hover td {
-      transform: translateY(-3px);
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
     }
 
     td {
-      border-bottom: 1px solid #eee;
+      border-bottom: 2px solid #eee;
+      position: relative;
     }
 
     .expand-btn {
       cursor: pointer;
       color: #01c6a0;
       font-weight: bold;
+      padding: 8px 15px;
+      border: 2px solid #01c6a0;
+      border-radius: 5px;
+      background: #fff;
       display: inline-block;
-      margin-top: 0.5rem;
+      margin-top: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .expand-btn:hover {
+      background: #01c6a0;
+      color: #fff;
+      transform: scale(1.05);
     }
 
     /* Animations */
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-20px); }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
@@ -123,7 +146,17 @@
     @media (max-width: 768px) {
       th, td {
         font-size: 0.9rem;
-        padding: 0.75rem;
+        padding: 0.9rem 1rem;
+      }
+
+      h2 {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+      }
+
+      .expand-btn {
+        padding: 6px 12px;
+        margin-top: 0.8rem;
       }
     }
 
@@ -136,21 +169,33 @@
       }
       tr {
         display: block;
-        margin-bottom: 1rem;
+        margin-bottom: 1.5rem;
       }
       td {
         display: block;
         position: relative;
-        padding-left: 35%;
+        padding: 1rem 1.5rem 1rem 40%;
+        border-bottom: 2px solid #eee;
       }
       td::before {
         content: attr(data-label);
         position: absolute;
         left: 1rem;
         top: 1rem;
-        font-weight: 600;
+        font-weight: 700;
         color: #01c6a0;
         text-transform: uppercase;
+        font-size: 0.9rem;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .expand-btn {
+        padding: 6px 12px;
+        margin-top: 0.8rem;
       }
     }
   </style>
@@ -312,6 +357,24 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      // Header hide/show on scroll
+      let lastScroll = 0;
+      const header = document.querySelector('header');
+
+      window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+
+        if (currentScroll > lastScroll && currentScroll > 50) {
+          // Scrolling down
+          header.classList.add('hidden');
+        } else {
+          // Scrolling up
+          header.classList.remove('hidden');
+        }
+        lastScroll = currentScroll;
+      });
+
+      // Expand/collapse functionality
       const expandButtons = document.querySelectorAll('.expand-btn');
 
       expandButtons.forEach(btn => {
@@ -320,29 +383,22 @@
           if (td.classList.contains('expanded')) {
             td.classList.remove('expanded');
             btn.textContent = 'Show more';
+            td.style.maxHeight = '150px';
           } else {
             td.classList.add('expanded');
             btn.textContent = 'Show less';
+            td.style.maxHeight = 'none';
           }
         });
       });
 
-      // Add dynamic height adjustment for mobile
-      const style = document.createElement('style');
-      document.head.appendChild(style);
-      style.sheet.insertRule(`
-        td.expanded {
-          max-height: none !important;
-          transition: max-height 0.3s ease;
-        }
-      `);
-
-      // Initial height limitation
+      // Initial height limitation for tasks
       const tds = document.querySelectorAll('td[data-label="Task"]');
       tds.forEach(td => {
         if (td.scrollHeight > 150) {
           td.style.maxHeight = '150px';
           td.style.overflow = 'hidden';
+          td.style.transition = 'max-height 0.3s ease';
           td.querySelector('.expand-btn').style.display = 'block';
         } else {
           td.querySelector('.expand-btn').style.display = 'none';
