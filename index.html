@@ -17,20 +17,24 @@
       padding: 1rem;
       text-align: center;
       color: #fff;
-      font-size: clamp(1.2rem, 4vw, 1.5rem); /* Scales font size responsively */
+      font-size: clamp(1.2rem, 4vw, 1.5rem);
     }
     .container {
       max-width: 1200px;
       margin: 0 auto;
       padding: 1rem;
       text-align: center;
+      min-height: calc(100vh - 4rem); /* Ensures container fills viewport minus header */
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
     .nav-buttons {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 0.75rem;
-      margin-top: 1.5rem;
+      gap: 1rem;
+      margin: 1.5rem 0;
     }
     .nav-buttons a {
       background-color: #01c6a0;
@@ -41,26 +45,13 @@
       width: 100%;
       max-width: 300px;
       text-align: center;
-      transition: background-color 0.3s ease; /* Smooth hover effect */
+      transition: background-color 0.3s ease;
     }
     .nav-buttons a:hover {
-      background-color: #019f82; /* Slightly darker shade for hover */
+      background-color: #019f82;
     }
 
     /* Responsive adjustments */
-    @media (min-width: 600px) {
-      .nav-buttons {
-        flex-direction: row;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 1rem;
-      }
-      .nav-buttons a {
-        width: auto; /* Buttons size naturally on larger screens */
-        min-width: 200px;
-      }
-    }
-
     @media (max-width: 600px) {
       header {
         padding: 0.75rem;
