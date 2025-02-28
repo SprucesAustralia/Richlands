@@ -2,50 +2,326 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Booking Details - 514 Boundary Road, Richlands</title>
   <style>
-    body {
+    * {
       margin: 0;
-      font-family: 'Articulat CF', sans-serif;
-      background-color: #ffffff;
-      color: #000;
+      padding: 0;
+      box-sizing: border-box;
     }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(to bottom right, #e6f3f6, #b3d9e6);
+      color: #333;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
     header {
-      background-color: #01c6a0;
-      padding: 20px;
+      background: #01c6a0;
+      padding: 1rem;
       text-align: center;
-      color: #fff;
-      font-size: 1.5em;
+      color: white;
+      font-size: clamp(1rem, 4vw, 1.5rem);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 10;
+      transition: transform 0.3s ease;
     }
+
+    header.hidden {
+      transform: translateY(-100%);
+    }
+
     .container {
       max-width: 1200px;
-      margin: auto;
-      padding: 20px;
+      margin: 1rem auto;
+      padding: 0 0.5rem;
+      padding-top: 3rem; /* Space for the header */
     }
-    a.back {
-      display: inline-block;
-      margin-bottom: 20px;
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      margin: 1rem 0;
       text-decoration: none;
       color: #01c6a0;
-      font-weight: bold;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s ease;
     }
-    table {
+
+    .back-btn:hover {
+      color: #019f82;
+      transform: translateX(-5px);
+    }
+
+    .back-btn::before {
+      content: '←';
+      margin-right: 0.5rem;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      color: #01c6a0;
+      text-align: center;
+      margin: 1rem 0;
+      animation: fadeInDown 0.8s ease;
+    }
+
+    .booking-card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+      padding: 1rem;
+      opacity: 0;
+      animation: slideUp 0.7s ease forwards;
+      animation-delay: 0.2s;
+    }
+
+    .booking-item {
+      margin: 0.8rem 0;
+      padding: 0.8rem;
+      border-bottom: 1px solid #eee;
+      transition: transform 0.3s ease;
+    }
+
+    .booking-item:last-child {
+      border-bottom: none;
+    }
+
+    .booking-item:hover {
+      transform: translateY(-2px);
+    }
+
+    .field-title {
+      font-weight: 600;
+      color: #01c6a0;
+      margin-bottom: 0.3rem;
+      font-size: 1rem;
+    }
+
+    .field-details {
+      margin-left: 0.8rem;
+      line-height: 1.4;
+    }
+
+    .floor-plan-btn {
+      display: inline-block;
+      margin-top: 0.4rem;
+      padding: 0.4rem 0.8rem;
+      background: #01c6a0;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .floor-plan-btn:hover {
+      background: #019f82;
+    }
+
+    .specific-areas {
+      list-style: none;
+      padding-left: 1rem;
+      margin-top: 0.5rem;
+    }
+
+    .specific-areas li {
+      position: relative;
+      padding-left: 1rem;
+      margin-bottom: 0.3rem;
+      font-size: 0.9rem;
+    }
+
+    .specific-areas li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: #01c6a0;
+      font-size: 0.8rem;
+    }
+
+    /* Floor Plan Gallery */
+    .floor-plan-gallery {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
       width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 20px;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 20;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      padding: 1rem;
+      overflow-y: auto;
     }
-    table, th, td {
-      border: 1px solid #ccc;
+
+    .floor-plan-gallery.active {
+      display: flex;
     }
-    th, td {
-      padding: 10px;
-      text-align: left;
-      vertical-align: top;
+
+    .floor-plan-pdf {
+      max-width: 45%;
+      margin: 0.5rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      background: #fff;
+      padding: 0.5rem;
+      text-align: center;
     }
-    @media (max-width: 600px) {
-      table, th, td {
-        font-size: 0.9em;
+
+    .floor-plan-pdf:hover {
+      transform: scale(1.05);
+    }
+
+    .floor-plan-pdf.loading {
+      background: #f0f0f0 url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid"%3E%3Ccircle cx="50" cy="50" r="40" stroke="%2301c6a0" stroke-width="8" fill="none" stroke-dasharray="62.83185307179586 62.83185307179586" stroke-linecap="round"%3E%3CanimateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s" values="0 50 50;360 50 50" keyTimes="0;1"%3E%3C/animateTransform%3E%3C/circle%3E%3C/svg%3E') no-repeat center;
+      background-size: 50%;
+      min-height: 200px;
+    }
+
+    .floor-plan-pdf a {
+      color: #01c6a0;
+      text-decoration: none;
+      font-weight: 600;
+      display: block;
+      margin-top: 0.5rem;
+    }
+
+    .floor-plan-pdf a:hover {
+      text-decoration: underline;
+    }
+
+    /* Lightbox Modal for PDF */
+    .pdf-lightbox {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 30;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .pdf-lightbox.active {
+      display: flex;
+    }
+
+    .pdf-viewer {
+      width: 90%;
+      height: 90%;
+      border: none;
+      border-radius: 8px;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-size: 2rem;
+      color: white;
+      background: rgba(0, 0, 0, 0.5);
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .close-btn:hover {
+      background: rgba(0, 0, 0, 0.7);
+    }
+
+    /* Animations */
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .booking-card {
+        padding: 0.8rem;
+      }
+      h2 {
+        font-size: 1.5rem;
+      }
+      .booking-item {
+        margin: 0.6rem 0;
+        padding: 0.6rem;
+      }
+      .field-title {
+        font-size: 0.9rem;
+      }
+      .field-details {
+        margin-left: 0.6rem;
+      }
+      .floor-plan-pdf {
+        max-width: 100%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header {
+        padding: 0.6rem;
+      }
+      .container {
+        padding: 0.3rem;
+        padding-top: 2.5rem;
+      }
+      .booking-card {
+        padding: 0.5rem;
+        border-radius: 8px;
+      }
+      .booking-item {
+        margin: 0.4rem 0;
+        padding: 0.4rem;
+      }
+      .field-title {
+        font-size: 0.8rem;
+      }
+      .field-details {
+        margin-left: 0.4rem;
+        font-size: 0.8rem;
+      }
+      .floor-plan-btn {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.8rem;
+      }
+      .specific-areas li {
+        font-size: 0.8rem;
+        margin-bottom: 0.2rem;
+      }
+      .floor-plan-pdf {
+        max-width: 100%;
+        margin: 0.3rem 0;
+      }
+      .close-btn {
+        top: 0.5rem;
+        right: 0.5rem;
+        font-size: 1.5rem;
+        width: 30px;
+        height: 30px;
       }
     }
   </style>
@@ -55,89 +331,188 @@
     514 Boundary Road, Richlands - Post Construction Cleaning - Office Refurbishment
   </header>
   <div class="container">
-    <a href="index.html" class="back">&larr; Home</a>
+    <a href="index.html" class="back-btn">Back to Home</a>
     <h2>Booking Details</h2>
-    <table>
-      <tbody>
-        <tr>
-          <th>Field</th>
-          <th>Details</th>
-          <th>Other Details</th>
-          <th>Notes</th>
-          <th>Other Notes</th>
-        </tr>
-        <tr>
-          <td>Site Address</td>
-          <td colspan="4">514 Boundary Road, Richlands, Queensland 4077</td>
-        </tr>
-        <tr>
-          <td>Property Size</td>
-          <td>
-            <strong>Building A</strong><br>
-            Ground Floor = 326.8m<sup>2</sup><br>
-            Level 1 = 296.7m<sup>2</sup>
-          </td>
-          <td>
-            <strong>Building B</strong><br>
-            Ground Floor = 319.3m<sup>2</sup><br>
-            Level 1 = 494.1m<sup>2</sup>
-          </td>
-          <td colspan="2"></td>
-        </tr>
-        <tr>
-          <td>Cleaner Details</td>
-          <td colspan="4"></td>
-        </tr>
-        <tr>
-          <td>Cleaning Instructions</td>
-          <td colspan="4">Post Construction Cleaning</td>
-        </tr>
-        <tr>
-          <td>Cleaning Type</td>
-          <td colspan="4">Post Construction Cleaning</td>
-        </tr>
-        <tr>
-          <td>Cleaning Frequency</td>
-          <td colspan="4">1 Visit</td>
-        </tr>
-        <tr>
-          <td>Cleaning Date 1</td>
-          <td colspan="4">13/03/25 - 17/03/2025</td>
-        </tr>
-        <tr>
-          <td>Cleaning Date 2</td>
-          <td colspan="4"></td>
-        </tr>
-        <tr>
-          <td>Time</td>
-          <td colspan="4"></td>
-        </tr>
-        <tr>
-          <td>Number of Cleaners</td>
-          <td colspan="4"></td>
-        </tr>
-        <tr>
-          <td>Duration (Hours:Minutes)</td>
-          <td colspan="4">Fix</td>
-        </tr>
-        <tr>
-          <td>Pay to Cleaner</td>
-          <td colspan="4"></td>
-        </tr>
-        <tr>
-          <td>Specific Areas</td>
-          <td colspan="4">
-            – Initial Preparation &amp; Safety Compliance (Site/General)<br>
-            – General Internal Areas<br>
-            – Windows &amp; Glazing<br>
-            – Joinery &amp; Fixtures<br>
-            – Sanitary Areas<br>
-            – Balconies, Patios &amp; External Areas<br>
-            – Final Checks &amp; Waste Disposal
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="booking-card">
+      <div class="booking-item">
+        <div class="field-title">Site Address</div>
+        <div class="field-details">514 Boundary Road, Richlands, Queensland 4077</div>
+        <button class="floor-plan-btn" id="viewFloorPlans">View Floor Plans</button>
+      </div>
+
+      <div class="booking-item">
+        <div class="field-title">Property Size</div>
+        <div class="field-details">
+          <strong>Building A:</strong><br>
+          Ground Floor = 326.8m²<br>
+          Level 1 = 296.7m²<br>
+          <strong>Building B:</strong><br>
+          Ground Floor = 319.3m²<br>
+          Level 1 = 494.1m²
+        </div>
+      </div>
+
+      <div class="booking-item">
+        <div class="field-title">Cleaner Details</div>
+        <div class="field-details">To be assigned</div>
+      </div>
+
+      <div class="booking-item">
+        <div class="field-title">Cleaning Instructions</div>
+        <div class="field-details">Post Construction Cleaning</div>
+      </div>
+
+      <div class="booking-item">
+        <div class="field-title">Cleaning Type</div>
+        <div class="field-details">Post Construction Cleaning</div>
+      </div>
+
+      <div class="booking-item">
+        <div class="field-title">Cleaning Frequency</div>
+        <div class="field-details">3 Visits</div>
+      </div>
+
+      <div class="booking-item">
+        <div class="field-title">Cleaning Dates</div>
+        <div class="field-details">
+          Date 1: 13/03/25 - 17/03/25<br>
+          Date 2: To be scheduled
+        </div>
+      </div>
+
+      <div class="booking-item">
+        <div class="field-title">Time</div>
+        <div class="field-details">To be advised</div>
+      </div>
+
+      <div class="booking-item">
+        <div class="field-title">Number of Cleaners</div>
+        <div class="field-details">3 cleaners for 4 days, or 4 cleaners for 3 days (8-9 hour days)</div>
+      </div>
+
+      <div class="booking-item">
+        <div class="field-title">Duration</div>
+        <div class="field-details">Fixed</div>
+      </div>
+
+      <div class="booking-item">
+        <div class="field-title">Pay to Cleaner</div>
+        <div class="field-details">$4800</div>
+      </div>
+
+      <div class="booking-item">
+        <div class="field-title">Specific Areas</div>
+        <ul class="specific-areas">
+          <li>Initial Preparation & Safety Compliance (Site/General)</li>
+          <li>General Internal Areas</li>
+          <li>Windows & Glazing</li>
+          <li>Joinery & Fixtures</li>
+          <li>Sanitary Areas</li>
+          <li>Balconies, Patios & External Areas</li>
+          <li>Final Checks & Waste Disposal</li>
+        </ul>
+      </div>
+    </div>
   </div>
+
+  <!-- Floor Plan Gallery -->
+  <div class="floor-plan-gallery" id="floorPlanGallery">
+    <div class="floor-plan-pdf loading" data-src="building_a_ground.pdf">
+      <a href="#" target="_blank">Building A Ground Floor (PDF)</a>
+    </div>
+    <div class="floor-plan-pdf loading" data-src="building_a_level1.pdf">
+      <a href="#" target="_blank">Building A Level 1 (PDF)</a>
+    </div>
+    <div class="floor-plan-pdf loading" data-src="building_b_ground.pdf">
+      <a href="#" target="_blank">Building B Ground Floor (PDF)</a>
+    </div>
+    <div class="floor-plan-pdf loading" data-src="building_b_level1.pdf">
+      <a href="#" target="_blank">Building B Level 1 (PDF)</a>
+    </div>
+  </div>
+
+  <!-- PDF Lightbox Modal -->
+  <div class="pdf-lightbox" id="pdfLightbox">
+    <button class="close-btn" id="closePdfLightbox">×</button>
+    <iframe src="" class="pdf-viewer" id="pdfViewer"></iframe>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Header hide/show on scroll
+      let lastScroll = 0;
+      const header = document.querySelector('header');
+
+      window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+
+        if (currentScroll > lastScroll && currentScroll > 50) {
+          // Scrolling down
+          header.classList.add('hidden');
+        } else {
+          // Scrolling up
+          header.classList.remove('hidden');
+        }
+        lastScroll = currentScroll;
+      });
+
+      // Floor Plan Gallery and Lazy Loading for PDFs
+      const viewFloorPlansBtn = document.getElementById('viewFloorPlans');
+      const floorPlanGallery = document.getElementById('floorPlanGallery');
+      const floorPlanPdfs = document.querySelectorAll('.floor-plan-pdf');
+      const pdfLightbox = document.getElementById('pdfLightbox');
+      const pdfViewer = document.getElementById('pdfViewer');
+      const closePdfLightbox = document.getElementById('closePdfLightbox');
+
+      // Lazy Load PDFs
+      const loadPdfs = () => {
+        floorPlanPdfs.forEach(pdf => {
+          const src = pdf.getAttribute('data-src');
+          if (src) {
+            const link = pdf.querySelector('a');
+            link.href = src; // Set the PDF URL for direct download/open
+            pdf.classList.remove('loading'); // Remove loading state
+            pdf.addEventListener('click', (e) => {
+              e.preventDefault();
+              pdfViewer.src = src; // Load PDF in lightbox
+              pdfLightbox.classList.add('active');
+            });
+          }
+        });
+      };
+
+      viewFloorPlansBtn.addEventListener('click', () => {
+        floorPlanGallery.classList.toggle('active');
+        if (floorPlanGallery.classList.contains('active') && !document.querySelector('.floor-plan-pdf:not(.loaded)')) {
+          loadPdfs(); // Load PDFs only when gallery opens
+        }
+      });
+
+      // Close PDF Lightbox
+      closePdfLightbox.addEventListener('click', () => {
+        pdfLightbox.classList.remove('active');
+        pdfViewer.src = ''; // Clear the PDF viewer
+      });
+
+      // Close PDF Lightbox on Outside Click
+      pdfLightbox.addEventListener('click', (e) => {
+        if (e.target === pdfLightbox) {
+          pdfLightbox.classList.remove('active');
+          pdfViewer.src = ''; // Clear the PDF viewer
+        }
+      });
+
+      // Add hover effect for booking items
+      const items = document.querySelectorAll('.booking-item');
+      items.forEach(item => {
+        item.addEventListener('mouseenter', () => {
+          item.style.background = '#f9f9f9';
+        });
+        item.addEventListener('mouseleave', () => {
+          item.style.background = 'transparent';
+        });
+      });
+    });
+  </script>
 </body>
 </html>
