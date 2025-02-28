@@ -494,10 +494,12 @@
             card.classList.remove('loading'); // Remove loading state
             viewer.onload = () => {
               card.classList.add('loaded'); // Optional: Add loaded class for custom styling
+              console.log(`PDF loaded: ${src}`);
             };
             viewer.onerror = () => {
               viewer.src = 'https://via.placeholder.com/400x300?text=PDF+Not+Found'; // Fallback
               card.classList.remove('loading');
+              console.error(`Failed to load PDF: ${src}`);
             };
           }
         });
