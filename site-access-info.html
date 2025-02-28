@@ -3,38 +3,188 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Site Acces Info - 514 Boundary Road, Richlands</title>
+  <title>Site Access Info - 514 Boundary Road, Richlands</title>
   <style>
     body {
       margin: 0;
-      font-family: 'Articulat CF', sans-serif;
-      background-color: #ffffff;
-      color: #000;
+      font-family: 'Arial', sans-serif; /* Changed to a widely supported font for consistency */
+      background-color: #f5f9fa; /* Light blue-gray background for a clean look */
+      color: #333;
+      line-height: 1.6;
     }
+
     header {
       background-color: #01c6a0;
       padding: 20px;
       text-align: center;
       color: #fff;
       font-size: 1.5em;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 10;
+      transition: transform 0.3s ease;
     }
+
+    header.hidden {
+      transform: translateY(-100%);
+    }
+
     .container {
       max-width: 1200px;
-      margin: auto;
+      margin: 80px auto 20px; /* Adjusted margin to account for fixed header */
       padding: 20px;
       text-align: center;
     }
+
     a.back {
       display: inline-block;
       margin-bottom: 20px;
       text-decoration: none;
       color: #01c6a0;
       font-weight: bold;
+      font-size: 1.1em;
+      padding: 10px 20px;
+      border: 2px solid #01c6a0;
+      border-radius: 5px;
+      transition: all 0.3s ease;
     }
+
+    a.back:hover {
+      background-color: #01c6a0;
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    h2 {
+      font-size: 2em;
+      color: #01c6a0;
+      margin-bottom: 30px;
+      animation: fadeInDown 0.8s ease;
+    }
+
+    .site-access-info {
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      margin: 20px 0;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      opacity: 0;
+      animation: slideUp 0.7s ease forwards;
+      animation-delay: 0.2s;
+    }
+
+    .site-access-info p {
+      font-size: 1.1em;
+      margin: 15px 0;
+      line-height: 1.8;
+      text-align: left;
+    }
+
+    .site-access-info strong {
+      color: #01c6a0;
+      font-weight: 600;
+    }
+
     img {
       width: 100%;
       max-width: 600px;
       height: auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      margin: 20px 0;
+      animation: zoomIn 0.8s ease;
+    }
+
+    /* Animations */
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes zoomIn {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      header {
+        padding: 15px;
+        font-size: 1.2em;
+      }
+
+      .container {
+        padding: 15px;
+        margin-top: 60px; /* Adjusted for smaller screens */
+      }
+
+      h2 {
+        font-size: 1.5em;
+        margin-bottom: 20px;
+      }
+
+      .site-access-info {
+        padding: 20px;
+        margin: 15px 0;
+      }
+
+      .site-access-info p {
+        font-size: 1em;
+      }
+
+      img {
+        max-width: 100%;
+      }
+
+      a.back {
+        font-size: 1em;
+        padding: 8px 15px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header {
+        padding: 10px;
+        font-size: 1em;
+      }
+
+      .container {
+        padding: 10px;
+        margin-top: 50px;
+      }
+
+      h2 {
+        font-size: 1.2em;
+        margin-bottom: 15px;
+      }
+
+      .site-access-info {
+        padding: 15px;
+        margin: 10px 0;
+      }
+
+      .site-access-info p {
+        font-size: 0.9em;
+      }
+
+      img {
+        max-width: 90%;
+      }
+
+      a.back {
+        font-size: 0.9em;
+        padding: 6px 12px;
+      }
     }
   </style>
 </head>
@@ -43,11 +193,37 @@
     514 Boundary Road, Richlands - Post Construction Cleaning - Office Refurbishment
   </header>
   <div class="container">
-    <a href="index.html" class="back">&larr; Home</a>
-    <h2>Site Acces Info</h2>
+    <a href="index.html" class="back">← Home</a>
+    <h2>Site Access Info</h2>
+    <div class="site-access-info">
+      <p><strong>SITE ACCESS – 514 BOUNDARY ROAD, RICHLANDS</strong></p>
+      <p>Please be sure to access the premises via Gate 4 from Boundary Road (see below for reference circled in green). Do not use the other gates as they are dedicated to the civil contractors onsite.</p>
+      <p>Once you enter through Gate 4, please proceed into the warehouse on your immediate right and park up. Visitor sign in will be arranged in the warehouse prior to the walkthrough.</p>
+    </div>
     <!-- Replace the src with your actual image file -->
-    <img src="site-access-info.jpg" alt="Site Acces Info">
+    <img src="site-access-info.jpg" alt="Site Access Info">
     <p>(Replace "site-access-info.jpg" with your actual image file.)</p>
   </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Header hide/show on scroll
+      let lastScroll = 0;
+      const header = document.querySelector('header');
+
+      window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+
+        if (currentScroll > lastScroll && currentScroll > 50) {
+          // Scrolling down
+          header.classList.add('hidden');
+        } else {
+          // Scrolling up
+          header.classList.remove('hidden');
+        }
+        lastScroll = currentScroll;
+      });
+    });
+  </script>
 </body>
 </html>
