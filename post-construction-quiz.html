@@ -5,45 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Post-Construction Cleaning Training</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-        }
-        .question, .user-info {
-            margin-bottom: 15px;
-        }
-        .error {
-            color: red;
-            display: none;
-            font-size: 0.9em;
-        }
-        .tips {
-            background-color: #f0f0f0;
-            padding: 15px;
-            margin-top: 30px;
-            border-radius: 5px;
-        }
-        button {
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
-        input[type="text"], input[type="date"] {
-            width: 100%;
-            max-width: 300px;
-            padding: 5px;
-        }
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 20px auto; padding: 20px; }
+        .question, .user-info { margin-bottom: 15px; }
+        .error { color: red; display: none; font-size: 0.9em; }
+        .tips { background-color: #f0f0f0; padding: 15px; margin-top: 30px; border-radius: 5px; }
+        button { padding: 10px 20px; background-color: #4CAF50; color: white; border: none; cursor: pointer; }
+        button:hover { background-color: #45a049; }
+        label { display: block; margin-bottom: 5px; }
+        input[type="text"], input[type="date"] { width: 100%; max-width: 300px; padding: 5px; }
     </style>
 </head>
 <body>
@@ -156,16 +125,8 @@
 
         const form = document.getElementById('cleaningQuiz');
         const correctAnswers = {
-            q1: 'true',
-            q2: 'false',
-            q3: 'true',
-            q4: 'true',
-            q5: 'false',
-            q6: 'false',
-            q7: 'true',
-            q8: 'false',
-            q9: 'true',
-            q10: 'false'
+            q1: 'true', q2: 'false', q3: 'true', q4: 'true', q5: 'false',
+            q6: 'false', q7: 'true', q8: 'false', q9: 'true', q10: 'false'
         };
 
         form.addEventListener('submit', async (e) => {
@@ -177,10 +138,8 @@
             };
             let hasErrors = false;
 
-            // Reset error messages
             document.querySelectorAll('.error').forEach(error => error.style.display = 'none');
 
-            // Check answers
             for (let i = 1; i <= 10; i++) {
                 const answer = formData.get(`q${i}`);
                 answers[`q${i}`] = answer;
@@ -190,19 +149,26 @@
                 }
             }
 
-            if (!hasErrors) {
-                try {
-                    const { data, error } = await supabase
-                        .from('quiz_results')
-                        .insert([answers]);
-                    
-                    if (error) throw error;
-                    alert('Answers submitted successfully!');
-                    form.reset();
-                } catch (error) {
-                    console.error('Error submitting to Supabase:', error);
-                    alert('Failed to submit answers. Please try again.');
+            console.log('Submitting to Supabase:', answers);
+
+            try {
+                const { data, error } = await supabase
+                    .from('quiz_results')
+                    .insert([answers])
+                    .select(); // Return inserted data for confirmation
+
+                if (error) {
+                    console.error('Supabase Error:', error.message, error.details, error.hint);
+                    alert(`Submission failed: ${error.message}`);
+                    return;
                 }
+
+                console.log('Success! Data inserted:', data);
+                alert('Answers submitted successfully!');
+                form.reset();
+            } catch (err) {
+                console.error('Unexpected error:', err);
+                alert('An unexpected error occurred. Check the console.');
             }
         });
     </script>
