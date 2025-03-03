@@ -5,170 +5,204 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Post-Construction Cleaning Training</title>
     <style>
-        body { font-family: Arial, sans-serif; max-width: 800px; margin: 20px auto; padding: 20px; }
-        .question, .user-info { margin-bottom: 15px; }
-        .error { color: red; display: none; font-size: 0.9em; }
-        .tips { background-color: #f0f0f0; padding: 15px; margin-top: 30px; border-radius: 5px; }
-        button { padding: 10px 20px; background-color: #4CAF50; color: white; border: none; cursor: pointer; }
-        button:hover { background-color: #45a049; }
-        label { display: block; margin-bottom: 5px; }
-        input[type="text"], input[type="date"] { width: 100%; max-width: 300px; padding: 5px; }
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        .question {
+            margin: 15px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        .error {
+            color: red;
+            font-size: 0.9em;
+            display: none;
+        }
+        .tips {
+            background-color: #f5f5f5;
+            padding: 15px;
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
     <h1>Post-Construction Cleaning Training Quiz</h1>
     <form id="cleaningQuiz">
-        <div class="user-info">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
-        </div>
-        <div class="user-info">
-            <label for="date">Date:</label>
-            <input type="date" id="date" name="date" required>
-        </div>
-
         <div class="question">
-            <p>1. Dust should be cleaned from top to bottom to prevent re-contamination.</p>
-            <input type="radio" name="q1" value="true" required> True
+            <p>1. Dust should be cleaned from top to bottom surfaces</p>
+            <input type="radio" name="q1" value="true"> True
             <input type="radio" name="q1" value="false"> False
-            <span class="error" id="error1">Wrong! Cleaning top to bottom prevents dust from falling on cleaned areas.</span>
+            <div class="error" id="error1">Wrong! Always clean from top to bottom to prevent dust from falling on already cleaned areas.</div>
         </div>
 
         <div class="question">
-            <p>2. It's acceptable to sweep debris into corners to deal with later.</p>
-            <input type="radio" name="q2" value="true" required> True
+            <p>2. It's okay to sweep dust into corners to deal with later</p>
+            <input type="radio" name="q2" value="true"> True
             <input type="radio" name="q2" value="false"> False
-            <span class="error" id="error2">Wrong! Debris should be properly collected and removed immediately.</span>
+            <div class="error" id="error2">Wrong! Sweeping dust into corners creates more work and can miss debris.</div>
         </div>
 
         <div class="question">
-            <p>3. Windows should be cleaned before floors to avoid drips and splashes.</p>
-            <input type="radio" name="q3" value="true" required> True
+            <p>3. Windows should be cleaned before floors</p>
+            <input type="radio" name="q3" value="true"> True
             <input type="radio" name="q3" value="false"> False
-            <span class="error" id="error3">Wrong! Windows should be cleaned first to prevent dirtying floors.</span>
+            <div class="error" id="error3">Wrong! Clean windows first to avoid splashing cleaning solutions on clean floors.</div>
         </div>
 
         <div class="question">
-            <p>4. A final walkthrough is necessary to ensure all areas are clean.</p>
-            <input type="radio" name="q4" value="true" required> True
+            <p>4. Wet cleaning should be done before dry cleaning</p>
+            <input type="radio" name="q4" value="true"> True
             <input type="radio" name="q4" value="false"> False
-            <span class="error" id="error4">Wrong! A final walkthrough ensures quality and completeness.</span>
+            <div class="error" id="error4">Wrong! Dry cleaning removes loose debris first, making wet cleaning more effective.</div>
         </div>
 
         <div class="question">
-            <p>5. It's fine to leave small amounts of construction dust as it will settle naturally.</p>
-            <input type="radio" name="q5" value="true" required> True
+            <p>5. Checking corners and edges is important for a thorough clean</p>
+            <input type="radio" name="q5" value="true"> True
             <input type="radio" name="q5" value="false"> False
-            <span class="error" id="error5">Wrong! All dust must be removed for a professional finish.</span>
+            <div class="error" id="error5">Wrong! Corners and edges often collect dust and debris and need special attention.</div>
         </div>
 
         <div class="question">
-            <p>6. Cleaning should start with wet mopping before dry dusting.</p>
-            <input type="radio" name="q6" value="true" required> True
+            <p>6. It's best to clean one room completely before moving to the next</p>
+            <input type="radio" name="q6" value="true"> True
             <input type="radio" name="q6" value="false"> False
-            <span class="error" id="error6">Wrong! Dry dusting should come first to remove loose particles.</span>
+            <div class="error" id="error6">Wrong! Systematic room-by-room cleaning prevents tracking debris between areas.</div>
         </div>
 
         <div class="question">
-            <p>7. Light fixtures should be checked for dust accumulation.</p>
-            <input type="radio" name="q7" value="true" required> True
+            <p>7. Light fixtures don't need cleaning after construction</p>
+            <input type="radio" name="q7" value="true"> True
             <input type="radio" name="q7" value="false"> False
-            <span class="error" id="error7">Wrong! Light fixtures often collect dust and need attention.</span>
+            <div class="error" id="error7">Wrong! Light fixtures collect dust during construction and need cleaning.</div>
         </div>
 
         <div class="question">
-            <p>8. It's okay to clean floors before removing debris from countertops.</p>
-            <input type="radio" name="q8" value="true" required> True
+            <p>8. A final walkthrough is unnecessary if you cleaned thoroughly</p>
+            <input type="radio" name="q8" value="true"> True
             <input type="radio" name="q8" value="false"> False
-            <span class="error" id="error8">Wrong! Clean countertops first to avoid dropping debris on floors.</span>
+            <div class="error" id="error8">Wrong! A final walkthrough ensures nothing was missed.</div>
         </div>
 
         <div class="question">
-            <p>9. A systematic room-by-room approach helps maintain consistency.</p>
-            <input type="radio" name="q9" value="true" required> True
+            <p>9. Floors should be vacuumed before mopping</p>
+            <input type="radio" name="q9" value="true"> True
             <input type="radio" name="q9" value="false"> False
-            <span class="error" id="error9">Wrong! A systematic approach ensures nothing is missed.</span>
+            <div class="error" id="error9">Wrong! Vacuuming removes loose debris, making mopping more effective.</div>
         </div>
 
         <div class="question">
-            <p>10. Cleaning should be rushed to meet deadlines, even if quality suffers.</p>
-            <input type="radio" name="q10" value="true" required> True
+            <p>10. Cleaning solutions can be used on any surface without checking</p>
+            <input type="radio" name="q10" value="true"> True
             <input type="radio" name="q10" value="false"> False
-            <span class="error" id="error10">Wrong! Quality should never be compromised for speed.</span>
+            <div class="error" id="error10">Wrong! Different surfaces require specific cleaning solutions to avoid damage.</div>
         </div>
 
-        <button type="submit">Submit</button>
+        <button type="submit">Submit Answers</button>
     </form>
 
     <div class="tips">
         <h2>10 Tips for Effective Post-Construction Cleaning</h2>
         <ol>
-            <li>Start with a thorough debris removal before detailed cleaning.</li>
-            <li>Clean from top to bottom to avoid re-dirtying lower surfaces.</li>
-            <li>Use a systematic approach, moving room by room.</li>
-            <li>Pay special attention to corners and hidden areas where dust collects.</li>
-            <li>Clean windows early to prevent drips on finished floors.</li>
-            <li>Vacuum before mopping to remove loose particles.</li>
-            <li>Check light fixtures and vents for accumulated dust.</li>
-            <li>Use appropriate cleaning solutions for different surfaces.</li>
-            <li>Perform a final inspection to catch missed spots.</li>
-            <li>Document the cleaning process for quality assurance.</li>
+            <li>Start cleaning from the top down to prevent re-contaminating lower areas</li>
+            <li>Remove large debris before starting detailed cleaning</li>
+            <li>Use microfiber cloths for dust collection - they trap particles effectively</li>
+            <li>Clean windows and glass surfaces first before moving to floors</li>
+            <li>Pay special attention to corners, edges, and hard-to-reach areas</li>
+            <li>Vacuum before mopping to remove loose dust and debris</li>
+            <li>Use appropriate cleaning solutions for different surfaces</li>
+            <li>Work systematically from one room to the next</li>
+            <li>Check light fixtures and ceiling fans for dust accumulation</li>
+            <li>Do a final walkthrough to ensure nothing was missed</li>
         </ol>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
-        const supabase = Supabase.createClient(
-            'https://hnnlowwxfonefjowakzw.supabase.co',
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imhubmxvd3d4Zm9uZWZqb3dha3p3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDA5ODIzNzQsImV4cCI6MjA1NjU1ODM3NH0.Tv4cK3JVP9vo3jDtVi0guDNVXRFsDtstyDUbgEOMJEk'
-        );
+        const SUPABASE_URL = 'https://hnnlowwxfonefjowakzw.supabase.co';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imhubmxvd3d4Zm9uZWZqb3dha3p3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDA5ODIzNzQsImV4cCI6MjA1NjU1ODM3NH0.Tv4cK3JVP9vo3jDtVi0guDNVXRFsDtstyDUbgEOMJEk';
 
-        const form = document.getElementById('cleaningQuiz');
         const correctAnswers = {
-            q1: 'true', q2: 'false', q3: 'true', q4: 'true', q5: 'false',
-            q6: 'false', q7: 'true', q8: 'false', q9: 'true', q10: 'false'
+            q1: 'true',
+            q2: 'false',
+            q3: 'true',
+            q4: 'false',
+            q5: 'true',
+            q6: 'true',
+            q7: 'false',
+            q8: 'false',
+            q9: 'true',
+            q10: 'false'
         };
 
-        form.addEventListener('submit', async (e) => {
+        document.getElementById('cleaningQuiz').addEventListener('submit', async (e) => {
             e.preventDefault();
-            const formData = new FormData(form);
-            const answers = {
-                name: formData.get('name'),
-                date: formData.get('date')
-            };
-            let hasErrors = false;
-
+            
+            // Reset error messages
             document.querySelectorAll('.error').forEach(error => error.style.display = 'none');
 
+            const formData = new FormData(e.target);
+            const answers = {
+                timestamp: new Date().toISOString(),
+                q1: formData.get('q1'),
+                q2: formData.get('q2'),
+                q3: formData.get('q3'),
+                q4: formData.get('q4'),
+                q5: formData.get('q5'),
+                q6: formData.get('q6'),
+                q7: formData.get('q7'),
+                q8: formData.get('q8'),
+                q9: formData.get('q9'),
+                q10: formData.get('q10')
+            };
+
+            // Check answers and show errors
+            let hasErrors = false;
             for (let i = 1; i <= 10; i++) {
-                const answer = formData.get(`q${i}`);
-                answers[`q${i}`] = answer;
-                if (answer !== correctAnswers[`q${i}`]) {
+                const q = `q${i}`;
+                if (answers[q] !== correctAnswers[q]) {
                     document.getElementById(`error${i}`).style.display = 'block';
                     hasErrors = true;
                 }
             }
 
-            console.log('Submitting to Supabase:', answers);
+            if (!hasErrors) {
+                alert('All answers correct! Submitting to database...');
+                
+                // Submit to Supabase
+                try {
+                    const response = await fetch(`${SUPABASE_URL}/rest/v1/cleaning_quiz_results`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'apikey': SUPABASE_KEY,
+                            'Authorization': `Bearer ${SUPABASE_KEY}`
+                        },
+                        body: JSON.stringify(answers)
+                    });
 
-            try {
-                const { data, error } = await supabase
-                    .from('quiz_results')
-                    .insert([answers])
-                    .select(); // Return inserted data for confirmation
-
-                if (error) {
-                    console.error('Supabase Error:', error.message, error.details, error.hint);
-                    alert(`Submission failed: ${error.message}`);
-                    return;
+                    if (response.ok) {
+                        alert('Answers submitted successfully!');
+                        e.target.reset();
+                    } else {
+                        alert('Error submitting answers. Please try again.');
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    alert('Error submitting answers. Please try again.');
                 }
-
-                console.log('Success! Data inserted:', data);
-                alert('Answers submitted successfully!');
-                form.reset();
-            } catch (err) {
-                console.error('Unexpected error:', err);
-                alert('An unexpected error occurred. Check the console.');
             }
         });
     </script>
