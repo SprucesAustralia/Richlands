@@ -4,13 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Final Inspection Cleaning Checklist - 514 Boundary Road, Richlands</title>
+  <!-- Load Supabase client library -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
   <style>
+    /* [Your existing CSS remains unchanged] */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-
     body {
       font-family: 'Arial', sans-serif;
       background: linear-gradient(135deg, #f0f4f9 0%, #e0e8f5 100%);
@@ -18,9 +20,8 @@
       line-height: 1.6;
       overflow-x: hidden;
     }
-
     header {
-      background: #01c6a0; /* Green header */
+      background: #01c6a0;
       padding: 1rem;
       text-align: center;
       color: white;
@@ -31,86 +32,76 @@
       z-index: 10;
       transition: transform 0.3s ease;
     }
-
     header.hidden {
       transform: translateY(-100%);
     }
-
     .container {
       max-width: 1080px;
       margin: 1.5rem auto;
       padding: 0 0.5rem;
     }
-
     a.back {
       display: inline-block;
       margin-bottom: 1rem;
       text-decoration: none;
-      color: #01c6a0; /* Green */
+      color: #01c6a0;
       font-weight: 600;
       padding: 8px 16px;
-      border: 2px solid #01c6a0; /* Green */
+      border: 2px solid #01c6a0;
       border-radius: 5px;
       font-size: 0.9rem;
       transition: all 0.3s ease;
     }
-
     a.back:hover {
-      background-color: #01c6a0; /* Green */
+      background-color: #01c6a0;
       color: #fff;
       transform: translateX(-5px);
     }
-
     h2 {
       font-size: 1.8rem;
-      color: #01c6a0; /* Green */
+      color: #01c6a0;
       text-align: center;
       margin: 1rem 0;
       text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
       animation: fadeInDown 1s ease;
     }
-
     .info-section {
       background: white;
-      border-radius: 10px; /* Increased for a nicer look */
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); /* Deeper shadow for elegance */
-      padding: 1.5rem; /* Increased padding for spaciousness */
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      padding: 1.5rem;
       margin-bottom: 1.5rem;
       opacity: 0;
       animation: slideUp 1s ease forwards;
       animation-delay: 0.2s;
       transition: all 0.3s ease;
     }
-
     .info-section label {
       display: block;
       font-weight: 600;
-      color: #01c6a0; /* Green for labels */
+      color: #01c6a0;
       margin-bottom: 0.5rem;
-      font-size: 1.1rem; /* Slightly larger for emphasis */
-      text-transform: uppercase; /* Added for a professional touch */
+      font-size: 1.1rem;
+      text-transform: uppercase;
       letter-spacing: 1px;
     }
-
     .info-section input[type="text"],
     .info-section input[type="date"] {
       width: 100%;
       box-sizing: border-box;
       font-size: 1rem;
-      padding: 10px; /* Increased padding for better touch */
-      border: 2px solid #ddd; /* Thicker border for a cleaner look */
-      border-radius: 6px; /* Increased radius for softer edges */
-      margin-bottom: 1rem; /* Increased margin for spacing */
+      padding: 10px;
+      border: 2px solid #ddd;
+      border-radius: 6px;
+      margin-bottom: 1rem;
       transition: border-color 0.3s ease, box-shadow 0.3s ease;
     }
-
     .info-section input[type="text"]:focus,
     .info-section input[type="date"]:focus {
-      border-color: #01c6a0; /* Green */
+      border-color: #01c6a0;
       outline: none;
-      box-shadow: 0 0 8px rgba(1, 198, 160, 0.3); /* Subtle green glow on focus */
+      box-shadow: 0 0 8px rgba(1, 198, 160, 0.3);
     }
-
     .checklist-section {
       background: white;
       border-radius: 8px;
@@ -120,43 +111,37 @@
       overflow: hidden;
       transition: all 0.3s ease;
     }
-
     .section-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 0.5rem 0;
       font-size: 1rem;
-      color: #01c6a0; /* Green */
+      color: #01c6a0;
       font-weight: 600;
     }
-
     .section-header .show-more-btn {
       padding: 6px 12px;
       cursor: pointer;
-      background-color: #01c6a0; /* Green */
+      background-color: #01c6a0;
       color: #fff;
       border: none;
       border-radius: 5px;
       font-size: 0.8rem;
       transition: background-color 0.3s ease, transform 0.3s ease;
     }
-
     .section-header .show-more-btn:hover {
-      background-color: #019f82; /* Darker green for hover */
+      background-color: #019f82;
       transform: scale(1.05);
     }
-
     .tasks {
       display: none;
       padding: 0.5rem 0;
       animation: slideDown 0.5s ease;
     }
-
     .tasks.expanded {
       display: block;
     }
-
     .task-item {
       margin-bottom: 0.5rem;
       padding: 0.5rem;
@@ -164,18 +149,15 @@
       border-radius: 5px;
       border: 1px solid #ddd;
     }
-
     .task-item input[type="checkbox"] {
       margin-right: 0.5rem;
       vertical-align: middle;
     }
-
     .task-label {
       font-weight: 500;
       color: #333;
       display: inline;
     }
-
     .upload-section {
       margin-top: 0.8rem;
       padding: 0.5rem;
@@ -183,42 +165,36 @@
       border-radius: 5px;
       border: 1px solid #ddd;
     }
-
     .upload-label {
       display: block;
       color: #666;
       font-size: 0.9rem;
       margin-bottom: 0.3rem;
     }
-
     input[type="file"] {
       display: none;
     }
-
     .custom-file-upload {
       display: inline-block;
       padding: 6px 12px;
       cursor: pointer;
-      background-color: #01c6a0; /* Green */
+      background-color: #01c6a0;
       color: #fff;
       border: none;
       border-radius: 5px;
       font-size: 0.8rem;
       transition: background-color 0.3s ease, transform 0.3s ease;
     }
-
     .custom-file-upload:hover {
-      background-color: #019f82; /* Darker green for hover */
+      background-color: #019f82;
       transform: scale(1.05);
     }
-
     .file-name {
       display: block;
       margin-top: 0.3rem;
       font-size: 0.8rem;
       color: #666;
     }
-
     .preview {
       display: block;
       margin-top: 0.5rem;
@@ -228,9 +204,8 @@
       box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
       transition: opacity 0.3s ease;
     }
-
     button.submit-btn {
-      background-color: #01c6a0; /* Green */
+      background-color: #01c6a0;
       color: #fff;
       padding: 10px 20px;
       border: none;
@@ -241,114 +216,90 @@
       margin-top: 1rem;
       transition: background-color 0.3s ease, transform 0.3s ease;
     }
-
     button.submit-btn:hover {
-      background-color: #019f82; /* Darker green for hover */
+      background-color: #019f82;
       transform: scale(1.05);
     }
-
-    /* Animations */
     @keyframes fadeInDown {
       from { opacity: 0; transform: translateY(-30px); }
       to { opacity: 1; transform: translateY(0); }
     }
-
     @keyframes slideUp {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
-
     @keyframes slideDown {
       from { max-height: 0; opacity: 0; }
       to { max-height: 300px; opacity: 1; }
     }
-
-    /* Responsive Design */
     @media (min-width: 768px) {
       header {
         padding: 1.5rem;
         font-size: 1.5rem;
       }
-
       .container {
         padding: 0 1rem;
         margin: 2rem auto;
       }
-
       a.back {
         font-size: 1rem;
         padding: 10px 20px;
         margin-bottom: 2rem;
       }
-
       h2 {
         font-size: 2.5rem;
         margin: 2rem 0;
       }
-
       .info-section {
-        padding: 2rem; /* Increased for desktop */
+        padding: 2rem;
         margin-bottom: 2rem;
       }
-
       .info-section label {
         font-size: 1.2rem;
         margin-bottom: 0.8rem;
       }
-
       .info-section input[type="text"],
       .info-section input[type="date"] {
         font-size: 1.2rem;
-        padding: 12px; /* Increased for desktop */
-        margin-bottom: 1.5rem; /* Increased for desktop */
+        padding: 12px;
+        margin-bottom: 1.5rem;
       }
-
       .checklist-section {
         padding: 1.5rem;
         margin-bottom: 2rem;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
       }
-
       .section-header {
         padding: 1rem 0;
         font-size: 1.2rem;
       }
-
       .section-header .show-more-btn {
         padding: 8px 16px;
         font-size: 1rem;
       }
-
       .tasks {
         padding: 1rem 0;
       }
-
       .task-item {
         padding: 1rem;
         margin-bottom: 1rem;
       }
-
       .task-item input[type="checkbox"] {
         margin-right: 1rem;
       }
-
       .upload-section {
         padding: 1rem;
       }
-
       .upload-label {
         font-size: 1rem;
       }
-
       .custom-file-upload, button.submit-btn {
         font-size: 1rem;
         padding: 10px 20px;
       }
-
       .file-name {
         font-size: 1rem;
       }
-
       .preview {
         max-width: 150px;
         max-height: 150px;
@@ -371,6 +322,7 @@
       <input type="date" id="inspection_date" name="inspection_date" required>
     </div>
     <form id="inspectionForm">
+      <!-- [Your checklist sections remain unchanged] -->
       <!-- Section 1: General Internal Areas -->
       <div class="checklist-section">
         <div class="section-header">
@@ -415,7 +367,6 @@
           <img id="general_internal_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
         </div>
       </div>
-
       <!-- Section 2: Windows & Glazing -->
       <div class="checklist-section">
         <div class="section-header">
@@ -444,7 +395,6 @@
           <img id="windows_glazing_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
         </div>
       </div>
-
       <!-- Section 3: Joinery & Fixtures -->
       <div class="checklist-section">
         <div class="section-header">
@@ -473,7 +423,6 @@
           <img id="joinery_fixtures_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
         </div>
       </div>
-
       <!-- Section 4: Sanitary Areas -->
       <div class="checklist-section">
         <div class="section-header">
@@ -510,7 +459,6 @@
           <img id="sanitary_areas_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
         </div>
       </div>
-
       <!-- Section 5: Balconies, Patios & External Areas -->
       <div class="checklist-section">
         <div class="section-header">
@@ -539,7 +487,6 @@
           <img id="external_areas_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
         </div>
       </div>
-
       <!-- Section 6: Final Checks & Waste Disposal -->
       <div class="checklist-section">
         <div class="section-header">
@@ -574,6 +521,11 @@
   </div>
 
   <script>
+    // Initialize Supabase client
+    const SUPABASE_URL = https://fwapqxmpgaucexojxqyv.supabase.co;
+    const SUPABASE_ANON_KEY = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ3YXBxeG1wZ2F1Y2V4b2p4cXl2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDA5NzU1MjksImV4cCI6MjA1NjU1MTUyOX0.o9fj4IY7CgKiMeFqIjg1bDKALnjiIfD6AT4W7j7EiTM;
+    const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
     document.addEventListener('DOMContentLoaded', () => {
       // Header hide/show on scroll
       let lastScroll = 0;
@@ -581,12 +533,9 @@
 
       window.addEventListener('scroll', () => {
         const currentScroll = window.pageYOffset;
-
         if (currentScroll > lastScroll && currentScroll > 50) {
-          // Scrolling down
           header.classList.add('hidden');
         } else {
-          // Scrolling up
           header.classList.remove('hidden');
         }
         lastScroll = currentScroll;
@@ -594,7 +543,6 @@
 
       // Collapsible sections
       const showMoreButtons = document.querySelectorAll('.show-more-btn');
-
       showMoreButtons.forEach(btn => {
         btn.addEventListener('click', () => {
           const tasks = btn.closest('.section-header').nextElementSibling;
@@ -638,13 +586,26 @@
       }
     }
 
-    document.getElementById('inspectionForm').addEventListener('submit', function(e) {
+    // Form submission with Supabase integration
+    document.getElementById('inspectionForm').addEventListener('submit', async function(e) {
       e.preventDefault();
       const name = document.getElementById('name').value;
       const inspectionDate = document.getElementById('inspection_date').value;
       const checkedTasks = Array.from(document.querySelectorAll('input[type="checkbox"]:checked'))
-        .map(cb => cb.name).join(', ');
-      alert(`Inspection form submitted!\nName: ${name}\nDate: ${inspectionDate}\nChecked Tasks: ${checkedTasks}`);
+                              .map(cb => cb.name).join(', ');
+
+      // Insert form data into Supabase table "inspections"
+      const { data, error } = await supabase
+        .from('inspections')
+        .insert([
+          { name: name, inspection_date: inspectionDate, tasks: checkedTasks }
+        ]);
+
+      if (error) {
+        alert(`Error: ${error.message}`);
+      } else {
+        alert(`Inspection form submitted successfully!\nName: ${name}\nDate: ${inspectionDate}\nChecked Tasks: ${checkedTasks}`);
+      }
     });
   </script>
 </body>
