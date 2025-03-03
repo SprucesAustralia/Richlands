@@ -135,27 +135,26 @@
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(39,174,96,0.3);
         }
-        .success-message, .error-message {
+        .success-message {
             text-align: center;
             margin-top: 20px;
             padding: 10px;
             border-radius: 5px;
             display: none;
             animation: popIn 0.3s ease-out;
-        }
-        @keyframes popIn {
-            from { transform: scale(0.8); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
-        .success-message {
             color: #155724;
             background: #d4edda;
             border: 1px solid #c3e6cb;
         }
-        .error-message {
+        .question-error {
             color: #721c24;
-            background: #f8d7da;
-            border: 1px solid #f5c6cb;
+            margin-top: 10px;
+            font-size: 0.9em;
+            display: none;
+        }
+        @keyframes popIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
         }
         .tips-section {
             margin-top: 40px;
@@ -194,6 +193,7 @@
                 <label><input type="radio" name="q1" value="true"> True</label>
                 <label><input type="radio" name="q1" value="false"> False</label>
             </div>
+            <div class="question-error" id="error-q1">Incorrect: Debris must be removed first.</div>
         </div>
 
         <div class="question" data-correct="false" style="--i: 2;">
@@ -202,6 +202,7 @@
                 <label><input type="radio" name="q2" value="true"> True</label>
                 <label><input type="radio" name="q2" value="false"> False</label>
             </div>
+            <div class="question-error" id="error-q2">Incorrect: Different surfaces require specific solutions.</div>
         </div>
 
         <div class="question" data-correct="true" style="--i: 3;">
@@ -210,6 +211,7 @@
                 <label><input type="radio" name="q3" value="true"> True</label>
                 <label><input type="radio" name="q3" value="false"> False</label>
             </div>
+            <div class="question-error" id="error-q3">Incorrect: Safety is essential during cleaning.</div>
         </div>
 
         <div class="question" data-correct="true" style="--i: 4;">
@@ -218,6 +220,7 @@
                 <label><input type="radio" name="q4" value="true"> True</label>
                 <label><input type="radio" name="q4" value="false"> False</label>
             </div>
+            <div class="question-error" id="error-q4">Incorrect: Windows should be cleaned first.</div>
         </div>
 
         <div class="question" data-correct="false" style="--i: 5;">
@@ -226,6 +229,7 @@
                 <label><input type="radio" name="q5" value="true"> True</label>
                 <label><input type="radio" name="q5" value="false"> False</label>
             </div>
+            <div class="question-error" id="error-q5">Incorrect: Vacuuming is necessary for dust removal.</div>
         </div>
 
         <div class="question" data-correct="false" style="--i: 6;">
@@ -234,6 +238,7 @@
                 <label><input type="radio" name="q6" value="true"> True</label>
                 <label><input type="radio" name="q6" value="false"> False</label>
             </div>
+            <div class="question-error" id="error-q6">Incorrect: Never use wet cloths on electrical outlets.</div>
         </div>
 
         <div class="question" data-correct="true" style="--i: 7;">
@@ -242,6 +247,7 @@
                 <label><input type="radio" name="q7" value="true"> True</label>
                 <label><input type="radio" name="q7" value="false"> False</label>
             </div>
+            <div class="question-error" id="error-q7">Incorrect: Always clean from top to bottom.</div>
         </div>
 
         <div class="question" data-correct="false" style="--i: 8;">
@@ -250,6 +256,7 @@
                 <label><input type="radio" name="q8" value="true"> True</label>
                 <label><input type="radio" name="q8" value="false"> False</label>
             </div>
+            <div class="question-error" id="error-q8">Incorrect: Ventilation is required with chemicals.</div>
         </div>
 
         <div class="question" data-correct="true" style="--i: 9;">
@@ -258,6 +265,7 @@
                 <label><input type="radio" name="q9" value="true"> True</label>
                 <label><input type="radio" name="q9" value="false"> False</label>
             </div>
+            <div class="question-error" id="error-q9">Incorrect: Tools must be maintained properly.</div>
         </div>
 
         <div class="question" data-correct="true" style="--i: 10;">
@@ -266,11 +274,11 @@
                 <label><input type="radio" name="q10" value="true"> True</label>
                 <label><input type="radio" name="q10" value="false"> False</label>
             </div>
+            <div class="question-error" id="error-q10">Incorrect: Final inspection is essential.</div>
         </div>
 
-        <button onclick="submitQuiz()">Submit Quiz</button>
-        <p class="success-message" id="successMessage">Quiz submitted successfully!</p>
-        <p class="error-message" id="errorMessage">Please correct the highlighted questions</p>
+        <button id="submitButton">Submit Quiz</button>
+        <p class="success-message" id="successMessage">Quiz submitted successfully! Check answers below.</p>
 
         <div class="tips-section">
             <h2>Tips for Post-Construction Cleaning</h2>
@@ -293,9 +301,13 @@
     <script>
         const supabaseUrl = 'https://hnnlowwxfonefjowakzw.supabase.co';
         const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imhubmxvd3d4Zm9uZWZqb3dha3p3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDA5ODIzNzQsImV4cCI6MjA1NjU1ODM3NH0.Tv4cK3JVP9vo3jDtVi0guDNVXRFsDtstyDUbgEOMJEk';
-        const supabase = Supabase.createClient(supabaseUrl, supabaseKey);
+        const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
-        async function submitQuiz() {
+        document.getElementById('submitButton').addEventListener('click', submitQuiz);
+
+        function submitQuiz() {
+            console.log('Submit button clicked');
+
             const name = document.getElementById('name').value;
             const date = document.getElementById('date').value;
 
@@ -304,49 +316,57 @@
                 return;
             }
 
+            // Reset all error states
             document.querySelectorAll('.question').forEach(q => q.classList.remove('error'));
-            document.getElementById('errorMessage').style.display = 'none';
+            document.querySelectorAll('.question-error').forEach(e => e.style.display = 'none');
+            document.getElementById('successMessage').style.display = 'none';
 
-            let allCorrect = true;
             const responses = {};
-            
+            let hasErrors = false;
+
+            // Check answers and collect responses
             for (let i = 1; i <= 10; i++) {
                 const question = document.querySelector(`.question:nth-child(${i + 2})`);
-                const selectedAnswer = document.querySelector(`input[name="q${i}"]:checked`)?.value;
+                const selectedAnswer = document.querySelector(`input[name="q${i}"]:checked`)?.value || 'unanswered';
                 const correctAnswer = question.dataset.correct;
+                const errorElement = document.getElementById(`error-q${i}`);
 
                 responses[`q${i}`] = selectedAnswer;
 
-                if (!selectedAnswer || selectedAnswer !== correctAnswer) {
-                    allCorrect = false;
+                if (selectedAnswer !== correctAnswer) {
+                    hasErrors = true;
                     question.classList.add('error');
+                    errorElement.style.display = 'block';
                 }
-            }
-
-            if (!allCorrect) {
-                document.getElementById('errorMessage').style.display = 'block';
-                return;
             }
 
             responses.name = name;
             responses.date = date;
 
-            try {
-                const { data, error } = await supabase
-                    .from('quiz_responses')
-                    .insert([responses]);
+            console.log('Submitting to Supabase:', responses);
 
-                if (error) throw error;
+            // Submit to Supabase regardless of correct answers
+            supabase.from('quiz_responses')
+                .insert([responses])
+                .then(({ data, error }) => {
+                    if (error) {
+                        console.error('Supabase error:', error);
+                        alert(`Error submitting to database: ${error.message}`);
+                        return;
+                    }
 
-                document.getElementById('successMessage').style.display = 'block';
-                setTimeout(() => {
-                    document.getElementById('successMessage').style.display = 'none';
-                    location.reload();
-                }, 2000);
-            } catch (error) {
-                console.error('Error submitting quiz:', error);
-                alert('There was an error submitting your quiz. Please try again.');
-            }
+                    console.log('Successfully submitted:', data);
+                    document.getElementById('successMessage').style.display = 'block';
+                    
+                    // Don't reset the form so users can see their mistakes
+                    setTimeout(() => {
+                        document.getElementById('successMessage').style.display = 'none';
+                    }, 3000);
+                })
+                .catch(err => {
+                    console.error('Submission error:', err);
+                    alert('Error submitting quiz. Please try again.');
+                });
         }
     </script>
 </body>
