@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Booking Details - 514 Boundary Road, Richlands</title>
+  <title>Final Inspection Cleaning Checklist - 514 Boundary Road, Richlands</title>
   <style>
     * {
       margin: 0;
@@ -13,22 +13,21 @@
 
     body {
       font-family: 'Arial', sans-serif;
-      background: linear-gradient(to bottom right, #e6f3f6, #b3d9e6);
+      background: linear-gradient(135deg, #f0f4f9 0%, #e0e8f5 100%);
       color: #333;
       line-height: 1.6;
       overflow-x: hidden;
     }
 
     header {
-      background: #01c6a0;
+      background: #01c6a0; /* Green header */
       padding: 1rem;
       text-align: center;
       color: white;
-      font-size: clamp(1rem, 4vw, 1.5rem);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      position: fixed;
+      font-size: 1.2rem;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      position: sticky;
       top: 0;
-      width: 100%;
       z-index: 10;
       transition: transform 0.3s ease;
     }
@@ -38,264 +37,323 @@
     }
 
     .container {
-      max-width: 1200px;
-      margin: 1rem auto;
+      max-width: 1080px;
+      margin: 1.5rem auto;
       padding: 0 0.5rem;
-      padding-top: 3rem; /* Space for the header */
     }
 
-    .back-btn {
-      display: inline-flex;
-      align-items: center;
-      margin: 1rem 0;
+    a.back {
+      display: inline-block;
+      margin-bottom: 1rem;
       text-decoration: none;
-      color: #01c6a0;
+      color: #01c6a0; /* Green */
       font-weight: 600;
-      font-size: 1rem;
+      padding: 8px 16px;
+      border: 2px solid #01c6a0; /* Green */
+      border-radius: 5px;
+      font-size: 0.9rem;
       transition: all 0.3s ease;
     }
 
-    .back-btn:hover {
-      color: #019f82;
+    a.back:hover {
+      background-color: #01c6a0; /* Green */
+      color: #fff;
       transform: translateX(-5px);
-    }
-
-    .back-btn::before {
-      content: '←';
-      margin-right: 0.5rem;
     }
 
     h2 {
       font-size: 1.8rem;
-      color: #01c6a0;
+      color: #01c6a0; /* Green */
       text-align: center;
       margin: 1rem 0;
-      animation: fadeInDown 0.8s ease;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+      animation: fadeInDown 1s ease;
     }
 
-    .booking-card {
+    .info-section {
       background: white;
-      border-radius: 10px;
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-      padding: 1rem;
+      border-radius: 10px; /* Increased for a nicer look */
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); /* Deeper shadow for elegance */
+      padding: 1.5rem; /* Increased padding for spaciousness */
+      margin-bottom: 1.5rem;
       opacity: 0;
-      animation: slideUp 0.7s ease forwards;
+      animation: slideUp 1s ease forwards;
       animation-delay: 0.2s;
+      transition: all 0.3s ease;
     }
 
-    .booking-item {
-      margin: 0.8rem 0;
-      padding: 0.8rem;
-      border-bottom: 1px solid #eee;
-      transition: transform 0.3s ease;
-    }
-
-    .booking-item:last-child {
-      border-bottom: none;
-    }
-
-    .booking-item:hover {
-      transform: translateY(-2px);
-    }
-
-    .field-title {
+    .info-section label {
+      display: block;
       font-weight: 600;
-      color: #01c6a0;
-      margin-bottom: 0.3rem;
-      font-size: 1rem;
-    }
-
-    .field-details {
-      margin-left: 0.8rem;
-      line-height: 1.4;
-    }
-
-    .specific-areas-list {
-      background: #e6f3f6; /* Light blue background like your screenshot */
-      border: 2px solid #01c6a0; /* Green border */
-      border-radius: 10px;
-      padding: 1rem;
-      margin: 1rem 0;
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-      opacity: 0;
-      animation: slideUp 0.7s ease forwards;
-    }
-
-    .specific-areas-list h3 {
-      font-size: 1.2rem;
-      color: #333;
+      color: #01c6a0; /* Green for labels */
       margin-bottom: 0.5rem;
-      font-weight: 600;
-      text-align: left;
+      font-size: 1.1rem; /* Slightly larger for emphasis */
+      text-transform: uppercase; /* Added for a professional touch */
+      letter-spacing: 1px;
     }
 
-    .specific-areas-list ul {
-      list-style: none;
-      padding-left: 0;
-    }
-
-    .specific-areas-list li {
-      position: relative;
-      padding-left: 1.5rem;
-      margin-bottom: 0.5rem;
-      font-size: 1rem;
-      color: #333;
-    }
-
-    .specific-areas-list li::before {
-      content: '✓';
-      position: absolute;
-      left: 0;
-      color: #01c6a0;
-      font-size: 1rem;
-    }
-
-    /* Floor Plan List (Vertical Display) */
-    .floor-plan-section {
-      margin: 1rem 0;
-      padding: 1rem;
-      background: #f5f9fa;
-      border-radius: 10px;
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-      opacity: 0;
-      animation: slideUp 0.7s ease forwards;
-    }
-
-    .floor-plan-list {
-      list-style: none;
-      padding: 0;
-    }
-
-    .floor-plan-item {
-      position: relative;
-      background: white;
-      border: 2px solid #01c6a0;
-      border-radius: 10px;
-      margin-bottom: 1rem;
-      padding: 1rem;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      cursor: grab;
-      transition: transform 0.3s ease;
-    }
-
-    .floor-plan-item:hover {
-      transform: scale(1.02);
-    }
-
-    .pdf-viewer {
+    .info-section input[type="text"],
+    .info-section input[type="date"] {
       width: 100%;
-      height: 600px; /* Keep the height as in your original design */
-      border: none; /* Remove any borders */
-      outline: none; /* Remove any outlines */
-      background: transparent; /* Ensure no background interferes */
-      overflow: hidden; /* Hide any overflow from the PDF viewer */
-      -webkit-overflow-scrolling: touch; /* Enable smooth scrolling on mobile */
-      touch-action: pan-x pan-y pinch-zoom; /* Enable pinch-to-zoom and panning on mobile */
+      box-sizing: border-box;
+      font-size: 1rem;
+      padding: 10px; /* Increased padding for better touch */
+      border: 2px solid #ddd; /* Thicker border for a cleaner look */
+      border-radius: 6px; /* Increased radius for softer edges */
+      margin-bottom: 1rem; /* Increased margin for spacing */
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
     }
 
-    /* Ensure touch-friendly behavior on mobile */
-    @media (max-width: 768px) {
-      .booking-card {
-        padding: 0.8rem;
-      }
-      h2 {
-        font-size: 1.5rem;
-      }
-      .booking-item {
-        margin: 0.6rem 0;
-        padding: 0.6rem;
-      }
-      .field-title {
-        font-size: 0.9rem;
-      }
-      .field-details {
-        margin-left: 0.6rem;
-      }
-      .specific-areas-list {
-        padding: 0.8rem;
-        margin: 0.8rem 0;
-      }
-      .specific-areas-list h3 {
-        font-size: 1rem;
-      }
-      .specific-areas-list li {
-        font-size: 0.9rem;
-        margin-bottom: 0.4rem;
-      }
-      .floor-plan-section {
-        padding: 0.8rem;
-      }
-      .floor-plan-item {
-        margin-bottom: 0.8rem;
-        padding: 0.8rem;
-      }
-      .pdf-viewer {
-        height: 400px; /* Adjust height for mobile */
-      }
+    .info-section input[type="text"]:focus,
+    .info-section input[type="date"]:focus {
+      border-color: #01c6a0; /* Green */
+      outline: none;
+      box-shadow: 0 0 8px rgba(1, 198, 160, 0.3); /* Subtle green glow on focus */
     }
 
-    @media (max-width: 480px) {
-      header {
-        padding: 0.6rem;
-      }
-      .container {
-        padding: 0.3rem;
-        padding-top: 2.5rem;
-      }
-      .booking-card {
-        padding: 0.5rem;
-        border-radius: 8px;
-      }
-      .booking-item {
-        margin: 0.4rem 0;
-        padding: 0.4rem;
-      }
-      .field-title {
-        font-size: 0.8rem;
-      }
-      .field-details {
-        margin-left: 0.4rem;
-        font-size: 0.8rem;
-      }
-      .specific-areas-list {
-        padding: 0.5rem;
-        margin: 0.5rem 0;
-        border-radius: 8px;
-      }
-      .specific-areas-list h3 {
-        font-size: 0.9rem;
-        margin-bottom: 0.3rem;
-      }
-      .specific-areas-list li {
-        font-size: 0.8rem;
-        margin-bottom: 0.3rem;
-        padding-left: 1.2rem;
-      }
-      .specific-areas-list li::before {
-        font-size: 0.8rem;
-      }
-      .floor-plan-section {
-        padding: 0.5rem;
-      }
-      .floor-plan-item {
-        margin-bottom: 0.5rem;
-        padding: 0.5rem;
-        border-radius: 8px;
-      }
-      .pdf-viewer {
-        height: 300px; /* Adjust height for smaller screens */
-      }
+    .checklist-section {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      margin-bottom: 1rem;
+      padding: 0.8rem;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 0;
+      font-size: 1rem;
+      color: #01c6a0; /* Green */
+      font-weight: 600;
+    }
+
+    .section-header .show-more-btn {
+      padding: 6px 12px;
+      cursor: pointer;
+      background-color: #01c6a0; /* Green */
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 0.8rem;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .section-header .show-more-btn:hover {
+      background-color: #019f82; /* Darker green for hover */
+      transform: scale(1.05);
+    }
+
+    .tasks {
+      display: none;
+      padding: 0.5rem 0;
+      animation: slideDown 0.5s ease;
+    }
+
+    .tasks.expanded {
+      display: block;
+    }
+
+    .task-item {
+      margin-bottom: 0.5rem;
+      padding: 0.5rem;
+      background: #f9f9f9;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+    }
+
+    .task-item input[type="checkbox"] {
+      margin-right: 0.5rem;
+      vertical-align: middle;
+    }
+
+    .task-label {
+      font-weight: 500;
+      color: #333;
+      display: inline;
+    }
+
+    .upload-section {
+      margin-top: 0.8rem;
+      padding: 0.5rem;
+      background: #f9f9f9;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+    }
+
+    .upload-label {
+      display: block;
+      color: #666;
+      font-size: 0.9rem;
+      margin-bottom: 0.3rem;
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    .custom-file-upload {
+      display: inline-block;
+      padding: 6px 12px;
+      cursor: pointer;
+      background-color: #01c6a0; /* Green */
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 0.8rem;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .custom-file-upload:hover {
+      background-color: #019f82; /* Darker green for hover */
+      transform: scale(1.05);
+    }
+
+    .file-name {
+      display: block;
+      margin-top: 0.3rem;
+      font-size: 0.8rem;
+      color: #666;
+    }
+
+    .preview {
+      display: block;
+      margin-top: 0.5rem;
+      max-width: 80px;
+      max-height: 80px;
+      border-radius: 5px;
+      box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+      transition: opacity 0.3s ease;
+    }
+
+    button.submit-btn {
+      background-color: #01c6a0; /* Green */
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+      width: 100%;
+      margin-top: 1rem;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    button.submit-btn:hover {
+      background-color: #019f82; /* Darker green for hover */
+      transform: scale(1.05);
     }
 
     /* Animations */
     @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-15px); }
+      from { opacity: 0; transform: translateY(-30px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
     @keyframes slideUp {
-      from { opacity: 0; transform: translateY(15px); }
+      from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideDown {
+      from { max-height: 0; opacity: 0; }
+      to { max-height: 300px; opacity: 1; }
+    }
+
+    /* Responsive Design */
+    @media (min-width: 768px) {
+      header {
+        padding: 1.5rem;
+        font-size: 1.5rem;
+      }
+
+      .container {
+        padding: 0 1rem;
+        margin: 2rem auto;
+      }
+
+      a.back {
+        font-size: 1rem;
+        padding: 10px 20px;
+        margin-bottom: 2rem;
+      }
+
+      h2 {
+        font-size: 2.5rem;
+        margin: 2rem 0;
+      }
+
+      .info-section {
+        padding: 2rem; /* Increased for desktop */
+        margin-bottom: 2rem;
+      }
+
+      .info-section label {
+        font-size: 1.2rem;
+        margin-bottom: 0.8rem;
+      }
+
+      .info-section input[type="text"],
+      .info-section input[type="date"] {
+        font-size: 1.2rem;
+        padding: 12px; /* Increased for desktop */
+        margin-bottom: 1.5rem; /* Increased for desktop */
+      }
+
+      .checklist-section {
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      }
+
+      .section-header {
+        padding: 1rem 0;
+        font-size: 1.2rem;
+      }
+
+      .section-header .show-more-btn {
+        padding: 8px 16px;
+        font-size: 1rem;
+      }
+
+      .tasks {
+        padding: 1rem 0;
+      }
+
+      .task-item {
+        padding: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .task-item input[type="checkbox"] {
+        margin-right: 1rem;
+      }
+
+      .upload-section {
+        padding: 1rem;
+      }
+
+      .upload-label {
+        font-size: 1rem;
+      }
+
+      .custom-file-upload, button.submit-btn {
+        font-size: 1rem;
+        padding: 10px 20px;
+      }
+
+      .file-name {
+        font-size: 1rem;
+      }
+
+      .preview {
+        max-width: 150px;
+        max-height: 150px;
+        margin-top: 1rem;
+      }
     }
   </style>
 </head>
@@ -304,110 +362,215 @@
     514 Boundary Road, Richlands - Post Construction Cleaning - Office Refurbishment
   </header>
   <div class="container">
-    <a href="index.html" class="back-btn">Back to Home</a>
-    <h2>Booking Details</h2>
-    <div class="booking-card">
-      <div class="booking-item">
-        <div class="field-title">Site Address</div>
-        <div class="field-details">514 Boundary Road, Richlands, Queensland 4077</div>
-      </div>
-
-      <div class="booking-item">
-        <div class="field-title">Property Size</div>
-        <div class="field-details">
-          <strong>Building A:</strong><br>
-          Ground Floor = 326.8m²<br>
-          Level 1 = 296.7m²<br>
-          <strong>Building B:</strong><br>
-          Ground Floor = 319.3m²<br>
-          Level 1 = 494.1m²
+    <a href="index.html" class="back">← Home</a>
+    <h2>Final Inspection Cleaning Checklist</h2>
+    <div class="info-section">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" placeholder="Enter your name" required>
+      <label for="inspection_date">Inspection Date:</label>
+      <input type="date" id="inspection_date" name="inspection_date" required>
+    </div>
+    <form id="inspectionForm">
+      <!-- Section 1: General Internal Areas -->
+      <div class="checklist-section">
+        <div class="section-header">
+          1. General Internal Areas
+          <button class="show-more-btn" type="button">Show More</button>
+        </div>
+        <div class="tasks">
+          <div class="task-item">
+            <input type="checkbox" name="general_internal_floors" id="general_internal_floors">
+            <label class="task-label" for="general_internal_floors">Floors (all debris/dust removed, no stains or footprints)</label>
+          </div>
+          <div class="task-item">
+            <input type="checkbox" name="general_internal_carpets" id="general_internal_carpets">
+            <label class="task-label" for="general_internal_carpets">Carpets (vacuumed, spot‐cleaned)</label>
+          </div>
+          <div class="task-item">
+            <input type="checkbox" name="general_internal_walls" id="general_internal_walls">
+            <label class="task-label" for="general_internal_walls">Walls and Ceilings (no dust, smudges, or marks)</label>
+          </div>
+          <div class="task-item">
+            <input type="checkbox" name="general_internal_doors" id="general_internal_doors">
+            <label class="task-label" for="general_internal_doors">Doors, Door Frames, Handles (clean, stickers removed)</label>
+          </div>
+          <div class="task-item">
+            <input type="checkbox" name="general_internal_skirting" id="general_internal_skirting">
+            <label class="task-label" for="general_internal_skirting">Skirting Boards, Window Sills, Ledges (dust‐free)</label>
+          </div>
+          <div class="task-item">
+            <input type="checkbox" name="general_internal_air_vents" id="general_internal_air_vents">
+            <label class="task-label" for="general_internal_air_vents">Air Vents, Fans, Light Fittings (dust‐free)</label>
+          </div>
+          <div class="task-item">
+            <input type="checkbox" name="general_internal_outlets" id="general_internal_outlets">
+            <label class="task-label" for="general_internal_outlets">Outlets and Switches (dust‐free, no residue)</label>
+          </div>
+        </div>
+        <div class="upload-section">
+          <span class="upload-label">Upload Photo:</span>
+          <label class="custom-file-upload" for="general_internal_file">Upload Photo</label>
+          <input type="file" id="general_internal_file" accept="image/*" onchange="updateFileName(event, 'general_internal_file_name'), previewImage(event, 'general_internal_preview')">
+          <span id="general_internal_file_name" class="file-name">No file chosen</span>
+          <img id="general_internal_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
         </div>
       </div>
 
-      <div class="booking-item">
-        <div class="field-title">Cleaner Details</div>
-        <div class="field-details">To be assigned</div>
-      </div>
-
-      <div class="booking-item">
-        <div class="field-title">Cleaning Instructions</div>
-        <div class="field-details">Post Construction Cleaning</div>
-      </div>
-
-      <div class="booking-item">
-        <div class="field-title">Cleaning Type</div>
-        <div class="field-details">Post Construction Cleaning</div>
-      </div>
-
-      <div class="booking-item">
-        <div class="field-title">Cleaning Frequency</div>
-        <div class="field-details">3 Visits</div>
-      </div>
-
-      <div class="booking-item">
-        <div class="field-title">Cleaning Dates</div>
-        <div class="field-details">
-          Dates: 13/03/25 - 17/03/25
+      <!-- Section 2: Windows & Glazing -->
+      <div class="checklist-section">
+        <div class="section-header">
+          2. Windows & Glazing
+          <button class="show-more-btn" type="button">Show More</button>
+        </div>
+        <div class="tasks">
+          <div class="task-item">
+            <input type="checkbox" name="windows_glazing_glass" id="windows_glazing_glass">
+            <label class="task-label" for="windows_glazing_glass">Window Glass (streak‐free, no adhesive residue)</label>
+          </div>
+          <div class="task-item">
+            <input type="checkbox" name="windows_glazing_frames" id="windows_glazing_frames">
+            <label class="task-label" for="windows_glazing_frames">Window Frames, Tracks, Sills (clean, debris removed)</label>
+          </div>
+          <div class="task-item">
+            <input type="checkbox" name="windows_glazing_panels" id="windows_glazing_panels">
+            <label class="task-label" for="windows_glazing_panels">Internal Glazing Panels, Partitions, Mirrors (streak‐free)</label>
+          </div>
+        </div>
+        <div class="upload-section">
+          <span class="upload-label">Upload Photo:</span>
+          <label class="custom-file-upload" for="windows_glazing_file">Upload Photo</label>
+          <input type="file" id="windows_glazing_file" accept="image/*" onchange="updateFileName(event, 'windows_glazing_file_name'), previewImage(event, 'windows_glazing_preview')">
+          <span id="windows_glazing_file_name" class="file-name">No file chosen</span>
+          <img id="windows_glazing_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
         </div>
       </div>
 
-      <div class="booking-item">
-        <div class="field-title">Time</div>
-        <div class="field-details">To be advised</div>
+      <!-- Section 3: Joinery & Fixtures -->
+      <div class="checklist-section">
+        <div class="section-header">
+          3. Joinery & Fixtures
+          <button class="show-more-btn" type="button">Show More</button>
+        </div>
+        <div class="tasks">
+          <div class="task-item">
+            <input type="checkbox" name="joinery_fixtures_cabinetry" id="joinery_fixtures_cabinetry">
+            <label class="task-label" for="joinery_fixtures_cabinetry">Cabinetry, Shelves, Cupboards (interior/exterior dust‐free)</label>
+          </div>
+          <div class="task-item">
+            <input type="checkbox" name="joinery_fixtures_handles" id="joinery_fixtures_handles">
+            <label class="task-label" for="joinery_fixtures_handles">Door Handles, Light Switches, Power Outlets (wiped clean)</label>
+          </div>
+          <div class="task-item">
+            <input type="checkbox" name="joinery_fixtures_kitchen" id="joinery_fixtures_kitchen">
+            <label class="task-label" for="joinery_fixtures_kitchen">Kitchen Surfaces, Benchtops, Sinks (clean, no stains/residue)</label>
+          </div>
+        </div>
+        <div class="upload-section">
+          <span class="upload-label">Upload Photo:</span>
+          <label class="custom-file-upload" for="joinery_fixtures_file">Upload Photo</label>
+          <input type="file" id="joinery_fixtures_file" accept="image/*" onchange="updateFileName(event, 'joinery_fixtures_file_name'), previewImage(event, 'joinery_fixtures_preview')">
+          <span id="joinery_fixtures_file_name" class="file-name">No file chosen</span>
+          <img id="joinery_fixtures_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
+        </div>
       </div>
 
-      <div class="booking-item">
-        <div class="field-title">Number of Cleaners</div>
-        <div class="field-details">4 cleaners for 3 days (8-9 hour days)</div>
+      <!-- Section 4: Sanitary Areas -->
+      <div class="checklist-section">
+        <div class="section-header">
+          4. Sanitary Areas (Bathrooms, Powder Rooms, Amenities)
+          <button class="show-more-btn" type="button">Show More</button>
+        </div>
+        <div class="tasks">
+          <div class="task-item">
+            <input type="checkbox" name="sanitary_areas_toilets" id="sanitary_areas_toilets">
+            <label class="task-label" for="sanitary_areas_toilets">Toilets, Urinals (disinfected, free of stains/odors)</label>
+          </div>
+          <div class="task-item">
+            <input type="checkbox" name="sanitary_areas_sinks" id="sanitary_areas_sinks">
+            <label class="task-label" for="sanitary_areas_sinks">Sinks, Taps (clean, disinfected)</label>
+          </div>
+          <div class="task-item">
+            <input type="checkbox" name="sanitary_areas_vanities" id="sanitary_areas_vanities">
+            <label class="task-label" for="sanitary_areas_vanities">Vanities, Mirrors, Towel Rails, Soap Holders (clean, streak‐free)</label>
+          </div>
+          <div class="task-item">
+            <input type="checkbox" name="sanitary_areas_shower" id="sanitary_areas_shower">
+            <label class="task-label" for="sanitary_areas_shower">Shower Screens (clean, stickers removed)</label>
+          </div>
+          <div class="task-item">
+            <input type="checkbox" name="sanitary_areas_floors" id="sanitary_areas_floors">
+            <label class="task-label" for="sanitary_areas_floors">Floors (mopped, disinfected, no residue)</label>
+          </div>
+        </div>
+        <div class="upload-section">
+          <span class="upload-label">Upload Photo:</span>
+          <label class="custom-file-upload" for="sanitary_areas_file">Upload Photo</label>
+          <input type="file" id="sanitary_areas_file" accept="image/*" onchange="updateFileName(event, 'sanitary_areas_file_name'), previewImage(event, 'sanitary_areas_preview')">
+          <span id="sanitary_areas_file_name" class="file-name">No file chosen</span>
+          <img id="sanitary_areas_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
+        </div>
       </div>
 
-      <div class="booking-item">
-        <div class="field-title">Duration</div>
-        <div class="field-details">Fixed</div>
+      <!-- Section 5: Balconies, Patios & External Areas -->
+      <div class="checklist-section">
+        <div class="section-header">
+          5. Balconies, Patios & External Areas
+          <button class="show-more-btn" type="button">Show More</button>
+        </div>
+        <div class="tasks">
+          <div class="task-item">
+            <input type="checkbox" name="external_areas_floors" id="external_areas_floors">
+            <label class="task-label" for="external_areas_floors">Floors (swept, washed, free of construction debris)</label>
+          </div>
+          <div class="task-item">
+            <input type="checkbox" name="external_areas_rubbish" id="external_areas_rubbish">
+            <label class="task-label" for="external_areas_rubbish">Rubbish Removal (all construction trash cleared)</label>
+          </div>
+          <div class="task-item">
+            <input type="checkbox" name="external_areas_appearance" id="external_areas_appearance">
+            <label class="task-label" for="external_areas_appearance">Overall Appearance (tidy, ready for inspection)</label>
+          </div>
+        </div>
+        <div class="upload-section">
+          <span class="upload-label">Upload Photo:</span>
+          <label class="custom-file-upload" for="external_areas_file">Upload Photo</label>
+          <input type="file" id="external_areas_file" accept="image/*" onchange="updateFileName(event, 'external_areas_file_name'), previewImage(event, 'external_areas_preview')">
+          <span id="external_areas_file_name" class="file-name">No file chosen</span>
+          <img id="external_areas_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
+        </div>
       </div>
 
-      <div class="booking-item">
-        <div class="field-title">Pay to Cleaner</div>
-        <div class="field-details">to be assinged</div>
+      <!-- Section 6: Final Checks & Waste Disposal -->
+      <div class="checklist-section">
+        <div class="section-header">
+          6. Final Checks & Waste Disposal
+          <button class="show-more-btn" type="button">Show More</button>
+        </div>
+        <div class="tasks">
+          <div class="task-item">
+            <input type="checkbox" name="final_checks_waste" id="final_checks_waste">
+            <label class="task-label" for="final_checks_waste">All Cleaning‐Related Waste in Designated Bins</label>
+          </div>
+          <div class="task-item">
+            <input type="checkbox" name="final_checks_treatments" id="final_checks_treatments">
+            <label class="task-label" for="final_checks_treatments">No Specialized Treatments/Deep Polishing (excluded unless specified)</label>
+          </div>
+          <div class="task-item">
+            <input type="checkbox" name="final_checks_condition" id="final_checks_condition">
+            <label class="task-label" for="final_checks_condition">Overall Site Condition (ready for handover/inspection)</label>
+          </div>
+        </div>
+        <div class="upload-section">
+          <span class="upload-label">Upload Photo:</span>
+          <label class="custom-file-upload" for="final_checks_file">Upload Photo</label>
+          <input type="file" id="final_checks_file" accept="image/*" onchange="updateFileName(event, 'final_checks_file_name'), previewImage(event, 'final_checks_preview')">
+          <span id="final_checks_file_name" class="file-name">No file chosen</span>
+          <img id="final_checks_preview" class="preview" src="#" alt="Image Preview" style="display:none;">
+        </div>
       </div>
-    </div>
 
-    <!-- Specific Areas List (Above Floor Plans) - Updated with New List and Adjusted Title Spacing -->
-    <div class="specific-areas-list" id="specificAreasList">
-      <h3>Specific Areas to Clean</h3>
-      <ul>
-        <li>Windows and Glass Surfaces</li>
-        <li>Doors and Door Frames</li>
-        <li>Flooring (Carpets, Tiles, Hardwood)</li>
-        <li>Walls and Ceilings</li>
-        <li>Bathrooms and Plumbing Fixtures</li>
-        <li>Office Furniture and Fixtures</li>
-        <li>Balconies and External Entrances</li>
-        <li>Dust and Debris Removal</li>
-      </ul>
-    </div>
-
-    <!-- Floor Plan List (Vertical Display, Automatic Load) -->
-    <div class="floor-plan-section">
-      <ul class="floor-plan-list">
-        <li class="floor-plan-item loading" data-src="building_a_ground.pdf">
-          <div class="pdf-header">Building A Ground Floor (PDF)</div>
-          <embed src="" class="pdf-viewer" id="pdfViewerA1" type="application/pdf">
-        </li>
-        <li class="floor-plan-item loading" data-src="building_a_level1.pdf">
-          <div class="pdf-header">Building A Level 1 (PDF)</div>
-          <embed src="" class="pdf-viewer" id="pdfViewerA2" type="application/pdf">
-        </li>
-        <li class="floor-plan-item loading" data-src="building_b_ground.pdf">
-          <div class="pdf-header">Building B Ground Floor (PDF)</div>
-          <embed src="" class="pdf-viewer" id="pdfViewerB1" type="application/pdf">
-        </li>
-        <li class="floor-plan-item loading" data-src="building_b_level1.pdf">
-          <div class="pdf-header">Building B Level 1 (PDF)</div>
-          <embed src="" class="pdf-viewer" id="pdfViewerB2" type="application/pdf">
-        </li>
-      </ul>
-    </div>
+      <button type="submit" class="submit-btn">Submit</button>
+    </form>
   </div>
 
   <script>
@@ -429,43 +592,59 @@
         lastScroll = currentScroll;
       });
 
-      // Floor Plan List (Automatic Load on Page Load)
-      const floorPlanItems = document.querySelectorAll('.floor-plan-item');
-      
-      // Load PDFs automatically on page load, assuming PDFs are in the root directory
-      const loadPdfs = () => {
-        floorPlanItems.forEach(item => {
-          const src = item.getAttribute('data-src');
-          if (src) {
-            const viewer = item.querySelector('.pdf-viewer');
-            viewer.src = src; // Load PDF directly from the root directory
-            item.classList.remove('loading'); // Remove loading state
-            viewer.onload = () => {
-              item.classList.add('loaded'); // Optional: Add loaded class for custom styling
-              console.log(`PDF loaded: ${src}`);
-            };
-            viewer.onerror = () => {
-              viewer.src = 'https://via.placeholder.com/600x800?text=PDF+Not+Found'; // Fallback with larger dimensions
-              item.classList.remove('loading');
-              console.error(`Failed to load PDF: ${src}`);
-            };
-          }
-        });
-      };
+      // Collapsible sections
+      const showMoreButtons = document.querySelectorAll('.show-more-btn');
 
-      // Load PDFs immediately when the page loads
-      loadPdfs();
-
-      // Add hover effect for booking items
-      const items = document.querySelectorAll('.booking-item');
-      items.forEach(item => {
-        item.addEventListener('mouseenter', () => {
-          item.style.background = '#f9f9f9';
-        });
-        item.addEventListener('mouseleave', () => {
-          item.style.background = 'transparent';
+      showMoreButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const tasks = btn.closest('.section-header').nextElementSibling;
+          const isExpanded = btn.classList.toggle('expanded');
+          tasks.classList.toggle('expanded');
+          btn.textContent = isExpanded ? 'Show Less' : 'Show More';
         });
       });
+
+      // Delay animations for checklist sections
+      const sections = document.querySelectorAll('.checklist-section');
+      sections.forEach((section, index) => {
+        section.style.animationDelay = `${0.3 + index * 0.2}s`;
+      });
+    });
+
+    function updateFileName(event, fileNameId) {
+      const input = event.target;
+      const fileNameSpan = document.getElementById(fileNameId);
+      if (input.files && input.files[0]) {
+        fileNameSpan.textContent = input.files[0].name.length > 20 ? input.files[0].name.substring(0, 20) + '...' : input.files[0].name;
+      } else {
+        fileNameSpan.textContent = 'No file chosen';
+      }
+    }
+
+    function previewImage(event, previewId) {
+      const input = event.target;
+      const preview = document.getElementById(previewId);
+      if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          preview.src = e.target.result;
+          preview.style.display = 'block';
+          preview.style.opacity = 0;
+          setTimeout(() => {
+            preview.style.opacity = 1;
+          }, 100);
+        };
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+
+    document.getElementById('inspectionForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const inspectionDate = document.getElementById('inspection_date').value;
+      const checkedTasks = Array.from(document.querySelectorAll('input[type="checkbox"]:checked'))
+        .map(cb => cb.name).join(', ');
+      alert(`Inspection form submitted!\nName: ${name}\nDate: ${inspectionDate}\nChecked Tasks: ${checkedTasks}`);
     });
   </script>
 </body>
