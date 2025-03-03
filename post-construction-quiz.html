@@ -32,6 +32,14 @@
             text-transform: uppercase;
             letter-spacing: 1px;
         }
+        h2 {
+            color: #2d5a2d;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            border-bottom: 2px solid #27ae60;
+            padding-bottom: 5px;
+        }
         .form-group {
             margin-bottom: 20px;
             opacity: 0;
@@ -149,6 +157,21 @@
             background: #f8d7da;
             border: 1px solid #f5c6cb;
         }
+        .tips-section {
+            margin-top: 40px;
+            padding: 20px;
+            background: #f5faf5;
+            border-radius: 10px;
+            border: 1px solid #e0f0e0;
+        }
+        .tips-section ol {
+            padding-left: 20px;
+            color: #2d5a2d;
+        }
+        .tips-section li {
+            margin: 10px 0;
+            line-height: 1.5;
+        }
     </style>
 </head>
 <body>
@@ -248,6 +271,22 @@
         <button onclick="submitQuiz()">Submit Quiz</button>
         <p class="success-message" id="successMessage">Quiz submitted successfully!</p>
         <p class="error-message" id="errorMessage">Please correct the highlighted questions</p>
+
+        <div class="tips-section">
+            <h2>Tips for Post-Construction Cleaning</h2>
+            <ol>
+                <li>Start by removing all large debris and construction materials from the site.</li>
+                <li>Work from top to bottom to prevent re-contaminating cleaned areas.</li>
+                <li>Use a HEPA filter vacuum to capture fine construction dust effectively.</li>
+                <li>Clean windows and glass surfaces before tackling floors to avoid dripping debris.</li>
+                <li>Use microfiber cloths for dusting to trap particles instead of spreading them.</li>
+                <li>Ensure proper ventilation when using cleaning chemicals to maintain air quality.</li>
+                <li>Pay special attention to corners and edges where dust tends to accumulate.</li>
+                <li>Use dry methods before wet cleaning to avoid creating mud from construction dust.</li>
+                <li>Clean and store all tools properly after use to maintain their condition.</li>
+                <li>Conduct a final walk-through to ensure all areas meet cleanliness standards.</li>
+            </ol>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
